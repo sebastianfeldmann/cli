@@ -1,0 +1,8 @@
+build:
+  tests:
+    override:
+      -
+        command: 'phpunit'
+        coverage:
+          file: 'build/logs/clover.xml'
+          format: 'clover'
