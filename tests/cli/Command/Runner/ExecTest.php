@@ -40,27 +40,4 @@ class ExecTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1', implode('', $result->getOutput()));
     }
-
-    /**
-     * Tests Exec::run
-     *
-     * @expectedException \RuntimeException
-     */
-    public function testRunFailed()
-    {
-        $res = new Result('echo 1', 1, '', '1');
-        $cmd = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Command')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $cmd->method('getCommand')
-            ->willReturn('echo 1');
-
-        $process = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Process')
-                        ->disableOriginalConstructor()
-                        ->getMock();
-        $process->expects($this->once())->method('execute')->willReturn($res);
-
-        $runner = new Exec($process);
-        $result = $runner->run($cmd);
-    }
 }
