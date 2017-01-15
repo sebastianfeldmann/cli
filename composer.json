@@ -1,0 +1,27 @@
+{
+  "name": "sebastianfeldmann/cli",
+  "description": "PHP cli helper classes",
+  "type": "library",
+  "keywords": ["cli"],
+  "homepage": "https://github.com/sebastianfeldmann/cli",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Feldmann",
+      "email": "sf@sebastian-feldmann.info"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/sebastianfeldmann/cli/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "SebastianFeldmann\\Cli\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.9.x-dev"
+    }
+  }
+}
