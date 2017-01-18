@@ -24,5 +24,5 @@ interface Process
      * @param  string $cmd
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function execute(string $cmd) : Result;
+    public function run(string $cmd) : Result;
 }

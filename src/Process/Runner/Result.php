@@ -7,14 +7,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Command;
+namespace SebastianFeldmann\Cli\Process\Runner;
+
+use SebastianFeldmann\Cli\Command\Result as CommandResult;
 
 /**
  * Class Result
  *
  * @package SebastianFeldmann\Cli
  */
-class RunnerResult
+class Result
 {
     /**
      * @var \SebastianFeldmann\Cli\Command\Result
@@ -32,7 +34,7 @@ class RunnerResult
      * @param \SebastianFeldmann\Cli\Command\Result $cmdResult
      * @param iterable                              $formatted
      */
-    public function __construct(Result $cmdResult, $formatted = [])
+    public function __construct(CommandResult $cmdResult, $formatted = [])
     {
         $this->cmdResult = $cmdResult;
         $this->formatted = $formatted;
@@ -43,7 +45,7 @@ class RunnerResult
      *
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function getCommandResult() : Result
+    public function getCommandResult() : CommandResult
     {
         return $this->cmdResult;
     }

@@ -7,9 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Command;
+namespace SebastianFeldmann\Cli\Process;
 
 use SebastianFeldmann\Cli\Command;
+use SebastianFeldmann\Cli\Command\OutputFormatter;
+use SebastianFeldmann\Cli\Process\Runner\Result;
 
 /**
  * Interface Runner
@@ -23,7 +25,7 @@ interface Runner
      *
      * @param  \SebastianFeldmann\Cli\Command                 $command
      * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
-     * @return \SebastianFeldmann\Cli\Command\RunnerResult
+     * @return \SebastianFeldmann\Cli\Process\Runner\Result
      */
-    public function run(Command $command, OutputFormatter $formatter = null) : RunnerResult;
+    public function run(Command $command, OutputFormatter $formatter = null) : Result;
 }

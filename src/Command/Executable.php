@@ -1,0 +1,168 @@
+<?php
+/**
+ * This file is part of SebastianFeldmann\Cli.
+ *
+ * (c) Sebastian Feldmann <sf@sebastian-feldmann.info>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace SebastianFeldmann\Cli\Command;
+
+use SebastianFeldmann\Cli\Command;
+
+/**
+ * Class Cmd
+ *
+ * @package SebastianFeldmann\Cli
+ */
+class Executable implements Command
+{
+    /**
+     * Command name
+     *
+     * @var string
+     */
+    private $cmd;
+
+    /**
+     * Display stdErr
+     *
+     * @var boolean
+     */
+    private $isSilent = false;
+
+    /**
+     * Command options
+     *
+     * @var string[]
+     */
+    private $options = [];
+
+    /**
+     * Command arguments
+     *
+     * @var string[]
+     */
+    private $arguments;
+
+    /**
+     * Constructor.
+     *
+     * @param string $cmd
+     */
+    public function __construct($cmd)
+    {
+        $this->cmd = $cmd;
+    }
+
+    /**
+     * Returns the string to execute on the command line.
+     *
+     * @return string
+     */
+    public function getCommand() : string
+    {
+        return $this->cmd
+        . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
+        . (count($this->arguments) ? ' ' . implode(' ', $this->arguments) : '')
+        . ($this->isSilent         ? ' 2> /dev/null'                      : '');
+    }
+
+    /**
+     * Silence the 'Cmd' by redirecting its stdErr output to /dev/null.
+     * The silence feature is disabled for Windows systems.
+     *
+     * @param  bool $bool
+     * @return \SebastianFeldmann\Cli\Command\Executable
+     */
+    public function silence($bool = true) : Executable
+    {
+        $this->isSilent = $bool && !defined('PHP_WINDOWS_VERSION_BUILD');
+        return $this;
+    }
+
+    /**
+     * Add option to list.
+     *
+     * @param  string               $option
+     * @param  mixed <string|array> $value
+     * @param  string               $glue
+     * @return \SebastianFeldmann\Cli\Command\Executable
+     */
+    public function addOption(string $option, $value = null, string $glue = '=') : Executable
+    {
+        if ($value !== null) {
+            // force space for multiple arguments e.g. --option 'foo' 'bar'
+            if (is_array($value)) {
+                $glue = ' ';
+            }
+            $value = $glue . $this->escapeArgument($value);
+        } else {
+            $value = '';
+        }
+        $this->options[] = $option . $value;
+
+        return $this;
+    }
+
+    /**
+     * Adds an option to a command if it is not empty.
+     *
+     * @param  string $option
+     * @param  mixed  $check
+     * @param  bool   $asValue
+     * @param  string $glue
+     * @return \SebastianFeldmann\Cli\Command\Executable
+     */
+    public function addOptionIfNotEmpty(string $option, $check, bool $asValue = true, string $glue = '=') : Executable
+    {
+        if (!empty($check)) {
+            if ($asValue) {
+                $this->addOption($option, $check, $glue);
+            } else {
+                $this->addOption($option);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Add argument to list.
+     *
+     * @param  mixed <string|array> $argument
+     * @return \SebastianFeldmann\Cli\Command\Executable
+     */
+    public function addArgument($argument) : Executable
+    {
+        $this->arguments[] = $this->escapeArgument($argument);
+        return $this;
+    }
+
+    /**
+     * Escape a shell argument.
+     *
+     * @param  mixed <string|array> $argument
+     * @return string
+     */
+    protected function escapeArgument($argument) : string
+    {
+        if (is_array($argument)) {
+            $argument = array_map('escapeshellarg', $argument);
+            $escaped  = implode(' ', $argument);
+        } else {
+            $escaped = escapeshellarg($argument);
+        }
+        return $escaped;
+    }
+
+    /**
+     * Returns the command to execute.
+     *
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getCommand();
+    }
+}

@@ -26,7 +26,7 @@ class ProcOpen implements Process
      * @param  string $cmd
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function execute(string $cmd) : Result
+    public function run(string $cmd) : Result
     {
         $old            = error_reporting(0);
         $descriptorSpec = [
