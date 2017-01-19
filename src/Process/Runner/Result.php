@@ -51,6 +51,16 @@ class Result
     }
 
     /**
+     * Return true if command was successful.
+     *
+     * @return bool
+     */
+    public function wasSuccessful() : bool
+    {
+        return $this->cmdResult->wasSuccessful();
+    }
+
+    /**
      * Return cmd output as array.
      *
      * @return array
