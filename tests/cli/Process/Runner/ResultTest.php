@@ -29,6 +29,16 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Result::wasSuccessful
+     */
+    public function testWasSuccessful()
+    {
+        $cmd = new CommandResult('echo 1', 0, "a\nb");
+        $res = new Result($cmd);
+        $this->assertTrue($res->wasSuccessful());
+    }
+
+    /**
      * Tests Result::getCommandResult
      */
     public function testGetCommandResult()
