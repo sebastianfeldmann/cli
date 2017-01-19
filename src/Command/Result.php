@@ -135,7 +135,14 @@ class Result
      */
     private function textToBuffer() : array
     {
-        return explode(PHP_EOL, $this->stdOut);
+        $buffer = explode(PHP_EOL, $this->stdOut);
+        // remove empty array elements at the end
+        $last = count($buffer) - 1;
+        while (empty($buffer[$last])) {
+            unset($buffer[$last]);
+            $last--;
+        }
+        return $buffer;
     }
 
     /**

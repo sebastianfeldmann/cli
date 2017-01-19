@@ -75,7 +75,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetStdOutAsArray()
     {
-        $result = new Result('echo 1', 0, 'foo' . PHP_EOL . 'bar');
+        $result = new Result('echo 1', 0, 'foo' . PHP_EOL . 'bar' . PHP_EOL . PHP_EOL);
         $this->assertEquals(2, count($result->getStdOutAsArray()));
     }
 
