@@ -10,7 +10,7 @@
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Command;
-use SebastianFeldmann\Cli\Command\Runner\Result;
+use SebastianFeldmann\Cli\Command\Runner\Result as RunnerResult;
 
 /**
  * Interface Runner
@@ -26,5 +26,5 @@ interface Runner
      * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
      * @return \SebastianFeldmann\Cli\Command\Runner\Result
      */
-    public function run(Command $command, OutputFormatter $formatter = null) : Result;
+    public function run(Command $command, OutputFormatter $formatter = null) : RunnerResult;
 }
