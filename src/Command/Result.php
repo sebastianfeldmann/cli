@@ -90,7 +90,7 @@ class Result
     /**
      * Command executed successful.
      */
-    public function wasSuccessful() : bool
+    public function isSuccessful() : bool
     {
         return $this->code == 0;
     }
