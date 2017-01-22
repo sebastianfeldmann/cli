@@ -26,25 +26,25 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Cmd::wasSuccessful
+     * Tests Result::isSuccessful
      */
-    public function testWasSuccessfulTrue()
+    public function testIsSuccessfulTrue()
     {
         $result = new Result('echo 1', 0);
         $this->assertEquals(true, $result->isSuccessful(), 'should be successful on code 0');
     }
 
     /**
-     * Tests Cmd::wasSuccessful
+     * Tests Result::isSuccessful
      */
-    public function testWasSuccessfulFalse()
+    public function testIsSuccessfulFalse()
     {
         $result = new Result('echo 1', 1);
         $this->assertEquals(false, $result->isSuccessful(), 'should not be successful on code 1');
     }
 
     /**
-     * Tests Cmd::getCmd
+     * Tests Result::getCmd
      */
     public function testGetCmd()
     {
@@ -53,7 +53,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Cmd::getStdOut
+     * Tests Result::getStdOut
      */
     public function testGetStdOut()
     {
@@ -62,7 +62,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Cmd::getStdErr
+     * Tests Result::getStdErr
      */
     public function testGetStdErr()
     {
@@ -71,7 +71,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Cmd::getStdOut
+     * Tests Result::getStdOut
      */
     public function testGetStdOutAsArray()
     {
@@ -80,7 +80,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Cmd::__toString
+     * Tests Result::__toString
      */
     public function testToString()
     {

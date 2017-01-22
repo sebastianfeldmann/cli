@@ -61,11 +61,31 @@ class Result
     }
 
     /**
+     * Return commands output to stdOut.
+     *
+     * @return string
+     */
+    public function getStdOut() : string
+    {
+        return $this->cmdResult->getStdOut();
+    }
+
+    /**
+     * Return commands error output to stdErr.
+     *
+     * @return string
+     */
+    public function getStdErr() : string
+    {
+        return $this->cmdResult->getStdErr();
+    }
+
+    /**
      * Return cmd output as array.
      *
      * @return array
      */
-    public function getOutput() : array
+    public function getBufferedOutput() : array
     {
         return $this->cmdResult->getStdOutAsArray();
     }
@@ -73,8 +93,7 @@ class Result
     /**
      * Return formatted output.
      *
-     * @return array
-     * @throws \Exception
+     * @return iterable
      */
     public function getFormattedOutput()
     {

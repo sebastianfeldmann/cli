@@ -29,13 +29,33 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Result::wasSuccessful
+     * Tests Result::isSuccessful
      */
-    public function testWasSuccessful()
+    public function testIsSuccessful()
     {
         $cmd = new CommandResult('echo 1', 0, "a\nb");
         $res = new Result($cmd);
-        $this->assertTrue($res->wasSuccessful());
+        $this->assertTrue($res->isSuccessful());
+    }
+
+    /**
+     * Tests Result::getStdOut
+     */
+    public function testGetStdOut()
+    {
+        $cmd = new CommandResult('echo 1', 0, "a\nb");
+        $res = new Result($cmd);
+        $this->assertEquals("a\nb", $res->getStdOut());
+    }
+
+    /**
+     * Tests Result::getStdErr
+     */
+    public function testGetStdErr()
+    {
+        $cmd = new CommandResult('echo 1', 0, "a\nb", "foo");
+        $res = new Result($cmd);
+        $this->assertEquals('foo', $res->getStdErr());
     }
 
     /**
@@ -51,10 +71,10 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests Result::getOutput
      */
-    public function testGetOutput()
+    public function testGetBufferedOutput()
     {
         $cmd = new CommandResult('echo 1', 0, "a\nb");
         $res = new Result($cmd);
-        $this->assertEquals(['a', 'b'], $res->getOutput());
+        $this->assertEquals(['a', 'b'], $res->getBufferedOutput());
     }
 }

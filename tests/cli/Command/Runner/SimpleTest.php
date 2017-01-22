@@ -38,7 +38,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $runner = new Simple($process);
         $result = $runner->run($cmd);
 
-        $this->assertEquals('1', implode('', $result->getOutput()));
+        $this->assertEquals('1', implode('', $result->getBufferedOutput()));
     }
 
     /**
