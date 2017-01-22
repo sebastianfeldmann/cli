@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Process\Runner;
+namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
 

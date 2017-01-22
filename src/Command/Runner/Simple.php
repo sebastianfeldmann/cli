@@ -7,31 +7,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Process\Runner;
+namespace SebastianFeldmann\Cli\Command\Runner;
 
 use RuntimeException;
 use SebastianFeldmann\Cli\Command;
+use SebastianFeldmann\Cli\Command\Runner;
 use SebastianFeldmann\Cli\Command\OutputFormatter;
-use SebastianFeldmann\Cli\Process;
-use SebastianFeldmann\Cli\Process\Runner;
+use SebastianFeldmann\Cli\Processor;
 
 class Simple implements Runner
 {
     /**
      * Class handling system calls.
      *
-     * @var \SebastianFeldmann\Cli\Process
+     * @var \SebastianFeldmann\Cli\Processor
      */
-    private $process;
+    private $processor;
 
     /**
      * Exec constructor.
      *
-     * @param \SebastianFeldmann\Cli\Process $process
+     * @param \SebastianFeldmann\Cli\Processor $processor
      */
-    public function __construct(Process $process = null)
+    public function __construct(Processor $processor = null)
     {
-        $this->process = $process !== null ? $process : new Process\ProcOpen();
+        $this->processor = $processor !== null ? $processor : new Processor\ProcOpen();
     }
 
     /**
@@ -39,13 +39,13 @@ class Simple implements Runner
      *
      * @param  \SebastianFeldmann\Cli\Command                 $command
      * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
-     * @return \SebastianFeldmann\Cli\Process\Runner\Result
+     * @return \SebastianFeldmann\Cli\Command\Runner\Result
      */
     public function run(Command $command, OutputFormatter $formatter = null) : Result
     {
-        $cmd = $this->process->run($command->getCommand());
+        $cmd = $this->processor->run($command->getCommand());
 
-        if (!$cmd->wasSuccessful()) {
+        if (!$cmd->isSuccessful()) {
             throw new RuntimeException('Command failed and exited with return code \'' . $cmd->getCode() . '\'');
         }
 

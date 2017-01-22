@@ -12,11 +12,11 @@ namespace SebastianFeldmann\Cli;
 use SebastianFeldmann\Cli\Command\Result;
 
 /**
- * Interface Cli
+ * Class Processor
  *
  * @package SebastianFeldmann\Cli
  */
-interface Process
+interface Processor
 {
     /**
      * Execute a system call.

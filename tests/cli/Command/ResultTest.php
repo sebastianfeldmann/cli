@@ -31,7 +31,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     public function testWasSuccessfulTrue()
     {
         $result = new Result('echo 1', 0);
-        $this->assertEquals(true, $result->wasSuccessful(), 'should be successful on code 0');
+        $this->assertEquals(true, $result->isSuccessful(), 'should be successful on code 0');
     }
 
     /**
@@ -40,7 +40,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     public function testWasSuccessfulFalse()
     {
         $result = new Result('echo 1', 1);
-        $this->assertEquals(false, $result->wasSuccessful(), 'should not be successful on code 1');
+        $this->assertEquals(false, $result->isSuccessful(), 'should not be successful on code 1');
     }
 
     /**

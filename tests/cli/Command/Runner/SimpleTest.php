@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Process\Runner;
+namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
 
@@ -30,7 +30,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $cmd->method('getCommand')
             ->willReturn('echo 1');
 
-        $process = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Process')
+        $process = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Processor')
                         ->disableOriginalConstructor()
                         ->getMock();
         $process->expects($this->once())->method('run')->willReturn($res);
@@ -55,7 +55,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $cmd->method('getCommand')
             ->willReturn('echo 1');
 
-        $process = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Process')
+        $process = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Processor')
                         ->disableOriginalConstructor()
                         ->getMock();
         $process->expects($this->once())->method('run')->willReturn($res);

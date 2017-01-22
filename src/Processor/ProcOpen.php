@@ -7,18 +7,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Process;
+namespace SebastianFeldmann\Cli\Processor;
 
 use RuntimeException;
 use SebastianFeldmann\Cli\Command\Result;
-use SebastianFeldmann\Cli\Process;
+use SebastianFeldmann\Cli\Processor;
 
 /**
  * Class ProcOpen
  *
  * @package SebastianFeldmann\Cli
  */
-class ProcOpen implements Process
+class ProcOpen implements Processor
 {
     /**
      * Execute the command.

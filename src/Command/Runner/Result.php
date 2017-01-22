@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianFeldmann\Cli\Process\Runner;
+namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
 
@@ -51,13 +51,13 @@ class Result
     }
 
     /**
-     * Return true if command was successful.
+     * Return true if command execution was successful.
      *
      * @return bool
      */
-    public function wasSuccessful() : bool
+    public function isSuccessful() : bool
     {
-        return $this->cmdResult->wasSuccessful();
+        return $this->cmdResult->isSuccessful();
     }
 
     /**
