@@ -12,9 +12,9 @@ namespace SebastianFeldmann\Cli\Command\Runner;
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
 
 /**
- * Class CommandResultTest
+ * Class ResultTest
  *
- * @package phpbu\App\Cli
+ * @package SebastianFeldmann\Cli
  */
 class ResultTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,6 +56,30 @@ class ResultTest extends \PHPUnit_Framework_TestCase
         $cmd = new CommandResult('echo 1', 0, "a\nb", "foo");
         $res = new Result($cmd);
         $this->assertEquals('foo', $res->getStdErr());
+    }
+
+    /**
+     * Tests Result::isOutputRedirected
+     * Tests Result::getRedirectPath
+     */
+    public function testIsOutputRedirectedTrue()
+    {
+        $cmd    = new CommandResult('echo 1', 0, 'foo', '', '/foo/bar.txt');
+        $result = new Result($cmd);
+        $this->assertTrue($result->isOutputRedirected());
+        $this->assertEquals('/foo/bar.txt', $result->getRedirectPath());
+    }
+
+    /**
+     * Tests Result::isOutputRedirected
+     * Tests Result::getRedirectPath
+     */
+    public function testIsOutputRedirectedFalse()
+    {
+        $cmd    = new CommandResult('echo 1', 0, 'foo');
+        $result = new Result($cmd);
+        $this->assertFalse($result->isOutputRedirected());
+        $this->assertEquals('', $result->getRedirectPath());
     }
 
     /**

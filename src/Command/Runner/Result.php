@@ -81,6 +81,26 @@ class Result
     }
 
     /**
+     * Is the output redirected to a file.
+     *
+     * @return bool
+     */
+    public function isOutputRedirected() : bool
+    {
+        return $this->cmdResult->isOutputRedirected();
+    }
+
+    /**
+     * Return path to the file where the output is redirected to.
+     *
+     * @return string
+     */
+    public function getRedirectPath() : string
+    {
+        return $this->cmdResult->getRedirectPath();
+    }
+
+    /**
      * Return cmd output as array.
      *
      * @return array

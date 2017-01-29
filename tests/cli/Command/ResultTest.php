@@ -80,6 +80,28 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Result::isOutputRedirected
+     * Tests Result::getRedirectPath
+     */
+    public function testIsOutputRedirectedTrue()
+    {
+        $result = new Result('echo 1', 0, 'foo', '', '/foo/bar.txt');
+        $this->assertTrue($result->isOutputRedirected());
+        $this->assertEquals('/foo/bar.txt', $result->getRedirectPath());
+    }
+
+    /**
+     * Tests Result::isOutputRedirected
+     * Tests Result::getRedirectPath
+     */
+    public function testIsOutputRedirectedFalse()
+    {
+        $result = new Result('echo 1', 0, 'foo');
+        $this->assertFalse($result->isOutputRedirected());
+        $this->assertEquals('', $result->getRedirectPath());
+    }
+
+    /**
      * Tests Result::__toString
      */
     public function testToString()

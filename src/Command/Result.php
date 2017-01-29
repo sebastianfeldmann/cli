@@ -52,19 +52,28 @@ class Result
     private $stdErr;
 
     /**
+     * Path where the output is redirected to.
+     *
+     * @var string
+     */
+    private $redirectPath;
+
+    /**
      * Result constructor.
      *
      * @param string $cmd
      * @param int    $code
      * @param string $stdOut
      * @param string $stdErr
+     * @param string $redirectPath
      */
-    public function __construct(string $cmd, int $code, string $stdOut = '', string $stdErr = '')
+    public function __construct(string $cmd, int $code, string $stdOut = '', string $stdErr = '', $redirectPath = '')
     {
-        $this->cmd    = $cmd;
-        $this->code   = $code;
-        $this->stdOut = $stdOut;
-        $this->stdErr = $stdErr;
+        $this->cmd          = $cmd;
+        $this->code         = $code;
+        $this->stdOut       = $stdOut;
+        $this->stdErr       = $stdErr;
+        $this->redirectPath = $redirectPath;
     }
 
     /**
@@ -113,6 +122,26 @@ class Result
     public function getStdErr() : string
     {
         return $this->stdErr;
+    }
+
+    /**
+     * Is the output redirected to a file.
+     *
+     * @return bool
+     */
+    public function isOutputRedirected() : bool
+    {
+        return !empty($this->redirectPath);
+    }
+
+    /**
+     * Return path to the file where the output is redirected to.
+     *
+     * @return string
+     */
+    public function getRedirectPath() : string
+    {
+        return $this->redirectPath;
     }
 
     /**
