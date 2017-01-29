@@ -15,15 +15,22 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * Class Result
  *
  * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 class Result
 {
     /**
+     * Result of executed command.
+     *
      * @var \SebastianFeldmann\Cli\Command\Result
      */
     private $cmdResult;
 
     /**
+     * Formatted output of executed result.
+     *
      * @var iterable
      */
     private $formatted;

@@ -10,9 +10,12 @@
 namespace SebastianFeldmann\Cli;
 
 /**
- * Interface Command
+ * Class Command
  *
  * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 interface Command
 {

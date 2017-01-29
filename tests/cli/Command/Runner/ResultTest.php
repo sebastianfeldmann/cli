@@ -15,6 +15,9 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * Class ResultTest
  *
  * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 class ResultTest extends \PHPUnit_Framework_TestCase
 {

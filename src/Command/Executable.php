@@ -12,9 +12,12 @@ namespace SebastianFeldmann\Cli\Command;
 use SebastianFeldmann\Cli\Command;
 
 /**
- * Class Cmd
+ * Class Executable
  *
  * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 class Executable implements Command
 {

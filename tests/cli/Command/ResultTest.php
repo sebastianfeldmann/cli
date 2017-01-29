@@ -12,7 +12,10 @@ namespace SebastianFeldmann\Cli\Command;
 /**
  * Class ResultTest
  *
- * @package phpbu\App\Cli
+ * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 class ResultTest extends \PHPUnit_Framework_TestCase
 {

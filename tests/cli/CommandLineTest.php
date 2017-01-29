@@ -15,6 +15,9 @@ use SebastianFeldmann\Cli\Command\Executable;
  * Class CommandLineTest
  *
  * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
  */
 class CommandLineTest extends \PHPUnit_Framework_TestCase
 {

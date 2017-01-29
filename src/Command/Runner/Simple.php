@@ -15,6 +15,14 @@ use SebastianFeldmann\Cli\Command\Runner;
 use SebastianFeldmann\Cli\Command\OutputFormatter;
 use SebastianFeldmann\Cli\Processor;
 
+/**
+ * Class Simple
+ *
+ * @package SebastianFeldmann\Cli
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/sebastianfeldmann/cli
+ * @since   Class available since Release 0.9.0
+ */
 class Simple implements Runner
 {
     /**
