@@ -18,10 +18,5 @@
     "psr-4": {
       "SebastianFeldmann\\Cli\\": "src/"
     }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.9.x-dev"
-    }
   }
 }
