@@ -68,6 +68,16 @@ class Result
     }
 
     /**
+     * Return the command exit code.
+     *
+     * @return string
+     */
+    public function getCode() : string
+    {
+        return $this->cmdResult->getCode();
+    }
+
+    /**
      * Return the executed cli command.
      *
      * @return string

@@ -42,6 +42,16 @@ class ResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Result::getCode
+     */
+    public function testGetCode()
+    {
+        $cmd = new CommandResult('echo 1', 0, "a\nb");
+        $res = new Result($cmd);
+        $this->assertEquals(0, $res->getCode());
+    }
+
+    /**
      * Tests Result::getCmd
      */
     public function testGetCmd()
