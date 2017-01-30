@@ -68,6 +68,16 @@ class Result
     }
 
     /**
+     * Return the executed cli command.
+     *
+     * @return string
+     */
+    public function getCmd() : string
+    {
+        return $this->cmdResult->getCmd();
+    }
+
+    /**
      * Return commands output to stdOut.
      *
      * @return string
