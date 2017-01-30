@@ -43,13 +43,6 @@ class Executable implements Command
     private $options = [];
 
     /**
-     * Command arguments
-     *
-     * @var string[]
-     */
-    private $arguments;
-
-    /**
      * Constructor.
      *
      * @param string $cmd
@@ -68,7 +61,6 @@ class Executable implements Command
     {
         return $this->cmd
         . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
-        . (count($this->arguments) ? ' ' . implode(' ', $this->arguments) : '')
         . ($this->isSilent         ? ' 2> /dev/null'                      : '');
     }
 
@@ -138,7 +130,7 @@ class Executable implements Command
      */
     public function addArgument($argument) : Executable
     {
-        $this->arguments[] = $this->escapeArgument($argument);
+        $this->options[] = $this->escapeArgument($argument);
         return $this;
     }
 
