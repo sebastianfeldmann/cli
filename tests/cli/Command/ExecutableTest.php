@@ -17,7 +17,7 @@ namespace SebastianFeldmann\Cli\Command;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ExecutableTest extends \PHPUnit_Framework_TestCase
+class ExecutableTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests Executable::addArgument

@@ -19,7 +19,7 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ResultTest extends \PHPUnit_Framework_TestCase
+class ResultTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests Result::getCmdResult

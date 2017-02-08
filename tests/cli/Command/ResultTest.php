@@ -17,7 +17,7 @@ namespace SebastianFeldmann\Cli\Command;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ResultTest extends \PHPUnit_Framework_TestCase
+class ResultTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests Cmd::getCode

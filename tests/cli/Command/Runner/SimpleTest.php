@@ -19,7 +19,7 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class SimpleTest extends \PHPUnit_Framework_TestCase
+class SimpleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests Exec::run
