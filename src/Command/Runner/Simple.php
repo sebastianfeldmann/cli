@@ -54,7 +54,12 @@ class Simple implements Runner
         $cmd = $this->processor->run($command->getCommand());
 
         if (!$cmd->isSuccessful()) {
-            throw new RuntimeException('Command failed and exited with return code \'' . $cmd->getCode() . '\'');
+            throw new RuntimeException(
+                'Command failed:' . PHP_EOL
+                . '  exit-code: ' . $cmd->getCode() . PHP_EOL
+                . '  message:   ' . $cmd->getStdErr() . PHP_EOL,
+                $cmd->getCode()
+            );
         }
 
         $formatted = $formatter !== null ? $formatter->format($cmd->getStdOutAsArray()) : [];

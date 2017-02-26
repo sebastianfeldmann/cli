@@ -63,7 +63,13 @@ class SimpleTest extends \PHPUnit\Framework\TestCase
                         ->getMock();
         $process->expects($this->once())->method('run')->willReturn($res);
 
-        $runner = new Simple($process);
-        $runner->run($cmd);
+        try {
+            $runner = new Simple($process);
+            $runner->run($cmd);
+        } catch (\Exception $e) {
+            $this->assertTrue(strpos($e->getMessage(), 'exit-code: 1') !== false);
+            $this->assertTrue(strpos($e->getMessage(), 'message:   1') !== false);
+            throw $e;
+        }
     }
 }
