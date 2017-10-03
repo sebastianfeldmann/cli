@@ -25,4 +25,11 @@ interface Command
      * @return string
      */
     public function getCommand() : string;
+
+    /**
+     * Returns a list of exit codes that are valid.
+     *
+     * @return array
+     */
+    public function getAcceptableExitCodes() : array;
 }

@@ -40,6 +40,15 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests Result::isSuccessful
      */
+    public function testIsSuccessfulTrueWithDifferentExitCode()
+    {
+        $result = new Result('echo 1', 1, '', '', '', [0, 1]);
+        $this->assertEquals(true, $result->isSuccessful(), 'should be successful on code 1');
+    }
+
+    /**
+     * Tests Result::isSuccessful
+     */
     public function testIsSuccessfulFalse()
     {
         $result = new Result('echo 1', 1);

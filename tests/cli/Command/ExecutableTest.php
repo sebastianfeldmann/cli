@@ -24,10 +24,21 @@ class ExecutableTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddArgumentPlain()
     {
-        $cmd = new Executable('foo');
+        $cmd = new Executable('foo', [0, 1]);
         $cmd->addArgument('bar');
 
         $this->assertEquals('foo \'bar\'', (string) $cmd, 'argument should be added');
+    }
+
+    /**
+     * Tests Executable::addArgument
+     */
+    public function testGetAcceptableExitCodes()
+    {
+        $cmd = new Executable('foo', [0, 1]);
+        $cmd->addArgument('bar');
+
+        $this->assertEquals([0, 1], $cmd->getAcceptableExitCodes());
     }
 
     /**

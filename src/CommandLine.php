@@ -43,6 +43,23 @@ class CommandLine implements Command
     private $pipeline = [];
 
     /**
+     * List of acceptable exit codes.
+     *
+     * @var array
+     */
+    private $acceptedExitCodes = [0];
+
+    /**
+     * Set the list of accepted exit codes.
+     *
+     * @param int[] $codes
+     */
+    public function acceptExitCodes(array $codes)
+    {
+        $this->acceptedExitCodes = $codes;
+    }
+
+    /**
      * Redirect the stdOut.
      *
      * @param string $path
@@ -141,6 +158,16 @@ class CommandLine implements Command
              . (!empty($this->redirectOutput) ? ' > ' . $this->redirectOutput : '');
 
         return $cmd;
+    }
+
+    /**
+     * Returns a list of exit codes that are valid.
+     *
+     * @return array
+     */
+    public function getAcceptableExitCodes() : array
+    {
+        return $this->acceptedExitCodes;
     }
 
     /**

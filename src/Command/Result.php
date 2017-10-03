@@ -34,6 +34,13 @@ class Result
     private $code;
 
     /**
+     * List of valid exit codes.
+     *
+     * @var int[]
+     */
+    private $validExitCodes;
+
+    /**
      * Output buffer.
      *
      * @var array
@@ -69,14 +76,23 @@ class Result
      * @param string $stdOut
      * @param string $stdErr
      * @param string $redirectPath
+     * @param int[]  $validExitCodes
      */
-    public function __construct(string $cmd, int $code, string $stdOut = '', string $stdErr = '', $redirectPath = '')
+    public function __construct(
+        string $cmd,
+        int $code,
+        string $stdOut = '',
+        string $stdErr = '',
+        string $redirectPath = '',
+        array $validExitCodes = [0]
+    )
     {
-        $this->cmd          = $cmd;
-        $this->code         = $code;
-        $this->stdOut       = $stdOut;
-        $this->stdErr       = $stdErr;
-        $this->redirectPath = $redirectPath;
+        $this->cmd            = $cmd;
+        $this->code           = $code;
+        $this->stdOut         = $stdOut;
+        $this->stdErr         = $stdErr;
+        $this->redirectPath   = $redirectPath;
+        $this->validExitCodes = $validExitCodes;
     }
 
     /**
@@ -104,7 +120,7 @@ class Result
      */
     public function isSuccessful() : bool
     {
-        return $this->code == 0;
+        return in_array($this->code, $this->validExitCodes);
     }
 
     /**

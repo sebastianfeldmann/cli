@@ -51,7 +51,7 @@ class Simple implements Runner
      */
     public function run(Command $command, OutputFormatter $formatter = null) : Result
     {
-        $cmd = $this->processor->run($command->getCommand());
+        $cmd = $this->processor->run($command->getCommand(), $command->getAcceptableExitCodes());
 
         if (!$cmd->isSuccessful()) {
             throw new RuntimeException(

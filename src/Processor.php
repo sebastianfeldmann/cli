@@ -25,7 +25,8 @@ interface Processor
      * Execute a system call.
      *
      * @param  string $cmd
+     * @param  int[]  $acceptableExitCodes
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function run(string $cmd) : Result;
+    public function run(string $cmd, array $acceptableExitCodes = [0]) : Result;
 }

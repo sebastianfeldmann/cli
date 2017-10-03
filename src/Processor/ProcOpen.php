@@ -27,9 +27,10 @@ class ProcOpen implements Processor
      * Execute the command.
      *
      * @param  string $cmd
+     * @param  int[]  $acceptableExitCodes
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function run(string $cmd) : Result
+    public function run(string $cmd, array $acceptableExitCodes = [0]) : Result
     {
         $old            = error_reporting(0);
         $descriptorSpec = [
@@ -52,6 +53,6 @@ class ProcOpen implements Processor
         $code = proc_close($process);
         error_reporting($old);
 
-        return new Result($cmd, $code, $stdOut, $stdErr);
+        return new Result($cmd, $code, $stdOut, $stdErr, '', $acceptableExitCodes);
     }
 }

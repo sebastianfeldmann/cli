@@ -43,13 +43,22 @@ class Executable implements Command
     private $options = [];
 
     /**
+     * List of acceptable exit codes.
+     *
+     * @var array
+     */
+    private $acceptableExitCodes = [];
+
+    /**
      * Constructor.
      *
      * @param string $cmd
+     * @param int[]  $exitCodes
      */
-    public function __construct($cmd)
+    public function __construct(string $cmd, array $exitCodes = [0])
     {
-        $this->cmd = $cmd;
+        $this->cmd                 = $cmd;
+        $this->acceptableExitCodes = $exitCodes;
     }
 
     /**
@@ -62,6 +71,16 @@ class Executable implements Command
         return $this->cmd
         . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
         . ($this->isSilent         ? ' 2> /dev/null'                      : '');
+    }
+
+    /**
+     * Returns a list of exit codes that are valid.
+     *
+     * @return int[]
+     */
+    public function getAcceptableExitCodes() : array
+    {
+        return $this->acceptableExitCodes;
     }
 
     /**
