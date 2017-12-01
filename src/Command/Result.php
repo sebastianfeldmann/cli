@@ -184,11 +184,13 @@ class Result
     private function textToBuffer() : array
     {
         $buffer = explode(PHP_EOL, $this->stdOut);
+
         // remove empty array elements at the end
-        $last = count($buffer) - 1;
-        while (empty($buffer[$last])) {
+        for ($last = count($buffer) - 1; $last > -1; $last--) {
+            if (!empty($buffer[$last])) {
+                return $buffer;
+            }
             unset($buffer[$last]);
-            $last--;
         }
         return $buffer;
     }
