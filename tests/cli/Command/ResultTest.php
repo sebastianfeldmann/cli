@@ -114,6 +114,17 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * Tests Result::outputToBuffer
+     *
+     * The resulted in an infinite loop, after the fix should work.
+     */
+    public function testEmptyOutputToBufferIsWorking()
+    {
+        $result = new Result('echo 1', 0, '', '');
+        $this->assertEquals([], $result->getStdOutAsArray());
+    }
+
+    /**
      * Tests Result::__toString
      */
     public function testToString()
