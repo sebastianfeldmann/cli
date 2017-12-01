@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Cli\Command;
 
+use SebastianFeldmann\Cli\Output\Util as OutputUtil;
+
 /**
  * Class Result
  *
@@ -183,16 +185,7 @@ class Result
      */
     private function textToBuffer() : array
     {
-        $buffer = explode(PHP_EOL, $this->stdOut);
-
-        // remove empty array elements at the end
-        for ($last = count($buffer) - 1; $last > -1; $last--) {
-            if (!empty($buffer[$last])) {
-                return $buffer;
-            }
-            unset($buffer[$last]);
-        }
-        return $buffer;
+        return OutputUtil::trimEmptyLines(explode(PHP_EOL, $this->stdOut));
     }
 
     /**
