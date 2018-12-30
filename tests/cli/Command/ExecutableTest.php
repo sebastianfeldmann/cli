@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Cli\Command;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class ExecutableTest
  *
@@ -17,7 +19,7 @@ namespace SebastianFeldmann\Cli\Command;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ExecutableTest extends \PHPUnit\Framework\TestCase
+class ExecutableTest extends TestCase
 {
     /**
      * Tests Executable::addArgument

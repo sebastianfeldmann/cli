@@ -10,6 +10,7 @@
 namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ResultTest
@@ -19,7 +20,7 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ResultTest extends \PHPUnit\Framework\TestCase
+class ResultTest extends TestCase
 {
     /**
      * Tests Result::getCmdResult

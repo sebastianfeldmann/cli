@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Cli\Output;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class CommandLineTest
  *
@@ -17,7 +19,7 @@ namespace SebastianFeldmann\Cli\Output;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 2.1.0
  */
-class UtilTest extends \PHPUnit\Framework\TestCase
+class UtilTest extends TestCase
 {
     /**
      * Tests:Util::trimEmptyLines
