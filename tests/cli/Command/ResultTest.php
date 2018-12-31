@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Cli\Command;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class ResultTest
  *
@@ -17,7 +19,7 @@ namespace SebastianFeldmann\Cli\Command;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class ResultTest extends \PHPUnit\Framework\TestCase
+class ResultTest extends TestCase
 {
     /**
      * Tests Cmd::getCode
@@ -34,7 +36,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     public function testIsSuccessfulTrue()
     {
         $result = new Result('echo 1', 0);
-        $this->assertEquals(true, $result->isSuccessful(), 'should be successful on code 0');
+        $this->assertTrue($result->isSuccessful(), 'should be successful on code 0');
     }
 
     /**
@@ -43,7 +45,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     public function testIsSuccessfulTrueWithDifferentExitCode()
     {
         $result = new Result('echo 1', 1, '', '', '', [0, 1]);
-        $this->assertEquals(true, $result->isSuccessful(), 'should be successful on code 1');
+        $this->assertTrue($result->isSuccessful(), 'should be successful on code 1');
     }
 
     /**
@@ -52,7 +54,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     public function testIsSuccessfulFalse()
     {
         $result = new Result('echo 1', 1);
-        $this->assertEquals(false, $result->isSuccessful(), 'should not be successful on code 1');
+        $this->assertFalse($result->isSuccessful(), 'should not be successful on code 1');
     }
 
     /**
@@ -88,7 +90,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     public function testGetStdOutAsArray()
     {
         $result = new Result('echo 1', 0, 'foo' . PHP_EOL . 'bar' . PHP_EOL . PHP_EOL);
-        $this->assertEquals(2, count($result->getStdOutAsArray()));
+        $this->assertCount(2, $result->getStdOutAsArray());
     }
 
     /**

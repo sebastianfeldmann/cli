@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Cli;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class CommandLineTest
  *
@@ -17,7 +19,7 @@ namespace SebastianFeldmann\Cli;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class UtilTest extends \PHPUnit\Framework\TestCase
+class UtilTest extends TestCase
 {
     /**
      * Fake global state
@@ -82,7 +84,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         } else {
             // assume ls should be there
             $ls = Util::detectCmdLocation('ls');
-            $this->assertTrue(!empty($ls), 'ls command should be found');
+            $this->assertNotEmpty($ls, 'ls command should be found');
         }
     }
 
@@ -219,7 +221,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         $plainText   = 'my text test';
         $coloredText = Util::formatWithColor('fg-black, bg-green', $plainText);
 
-        $this->assertTrue(strpos($coloredText, "\x1b[0m") !== false);
+        $this->assertContains("\x1b[0m", $coloredText);
     }
 
     /**
@@ -230,7 +232,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         $plainText   = '';
         $coloredText = Util::formatWithColor('fg-black, bg-green', $plainText);
 
-        $this->assertTrue(strpos($coloredText, "\x1b[0m") === false);
+        $this->assertNotContains("\x1b[0m", $coloredText);
     }
 
     /**
@@ -271,10 +273,10 @@ class UtilTest extends \PHPUnit\Framework\TestCase
 
         Util::removeDir($dirToDelete);
 
-        $this->assertFalse(file_exists($file));
-        $this->assertFalse(file_exists($fileInSub));
-        $this->assertFalse(file_exists($subDir));
-        $this->assertFalse(file_exists($dirToDelete));
+        $this->assertFileNotExists($file);
+        $this->assertFileNotExists($fileInSub);
+        $this->assertFileNotExists($subDir);
+        $this->assertFileNotExists($dirToDelete);
     }
 
     /**

@@ -10,6 +10,7 @@
 namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SimpleTest
@@ -19,7 +20,7 @@ use SebastianFeldmann\Cli\Command\Result as CommandResult;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class SimpleTest extends \PHPUnit\Framework\TestCase
+class SimpleTest extends TestCase
 {
     /**
      * Tests Exec::run
@@ -67,8 +68,8 @@ class SimpleTest extends \PHPUnit\Framework\TestCase
             $runner = new Simple($process);
             $runner->run($cmd);
         } catch (\Exception $e) {
-            $this->assertTrue(strpos($e->getMessage(), 'exit-code: 1') !== false);
-            $this->assertTrue(strpos($e->getMessage(), 'message:   1') !== false);
+            $this->assertContains('exit-code: 1', $e->getMessage());
+            $this->assertContains('message:   1', $e->getMessage());
             throw $e;
         }
     }

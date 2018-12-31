@@ -10,6 +10,7 @@
 namespace SebastianFeldmann\Cli;
 
 use SebastianFeldmann\Cli\Command\Executable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CommandLineTest
@@ -19,7 +20,7 @@ use SebastianFeldmann\Cli\Command\Executable;
  * @link    https://github.com/sebastianfeldmann/cli
  * @since   Class available since Release 0.9.0
  */
-class CommandLineTest extends \PHPUnit\Framework\TestCase
+class CommandLineTest extends TestCase
 {
     /**
      * Tests CommandLine::getCommand
@@ -101,5 +102,16 @@ class CommandLineTest extends \PHPUnit\Framework\TestCase
         $commandLine->pipeOutputTo($compressor);
 
         $this->assertEquals('echo \'foo\' | bzip2 \'foo.bz2\'', $commandLine->getCommand());
+    }
+
+    /**
+     * Tests CommandLine::getAcceptableExitCodes
+     */
+    public function testGetAcceptableExitCodes()
+    {
+        $commandLine = new CommandLine();
+        $commandLine->acceptExitCodes([0, 1]);
+
+        $this->assertEquals([0, 1], $commandLine->getAcceptableExitCodes());
     }
 }
