@@ -2,6 +2,7 @@
 Some CLI helper classes
 
 [![Latest Stable Version](https://poser.pugx.org/sebastianfeldmann/cli/v/stable.svg)](https://packagist.org/packages/sebastianfeldmann/cli)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/sebastianfeldmann/cli.svg?v1)](https://packagist.org/packages/sebastianfeldmann/cli)
 [![License](https://poser.pugx.org/sebastianfeldmann/cli/license.svg)](https://packagist.org/packages/sebastianfeldmann/cli)
 [![Build Status](https://travis-ci.org/sebastianfeldmann/cli.svg?branch=master)](https://travis-ci.org/sebastianfeldmann/cli)

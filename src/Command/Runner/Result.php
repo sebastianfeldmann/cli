@@ -41,7 +41,7 @@ class Result
      * @param \SebastianFeldmann\Cli\Command\Result $cmdResult
      * @param iterable                              $formatted
      */
-    public function __construct(CommandResult $cmdResult, $formatted = [])
+    public function __construct(CommandResult $cmdResult, iterable $formatted = [])
     {
         $this->cmdResult = $cmdResult;
         $this->formatted = $formatted;
@@ -142,7 +142,7 @@ class Result
      *
      * @return iterable
      */
-    public function getFormattedOutput()
+    public function getFormattedOutput() : iterable
     {
         return $this->formatted;
     }

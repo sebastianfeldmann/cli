@@ -25,5 +25,5 @@ interface OutputFormatter
      * @param  array $output
      * @return iterable
      */
-    public function format(array $output);
+    public function format(array $output) : iterable;
 }

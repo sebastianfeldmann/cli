@@ -52,9 +52,10 @@ class CommandLine implements Command
     /**
      * Set the list of accepted exit codes.
      *
-     * @param int[] $codes
+     * @param  int[] $codes
+     * @return void
      */
-    public function acceptExitCodes(array $codes)
+    public function acceptExitCodes(array $codes) : void
     {
         $this->acceptedExitCodes = $codes;
     }
@@ -62,9 +63,10 @@ class CommandLine implements Command
     /**
      * Redirect the stdOut.
      *
-     * @param string $path
+     * @param  string $path
+     * @return void
      */
-    public function redirectOutputTo($path)
+    public function redirectOutputTo($path) : void
     {
         $this->redirectOutput = $path;
     }
@@ -72,9 +74,9 @@ class CommandLine implements Command
     /**
      * Should the output be redirected.
      *
-     * @return boolean
+     * @return bool
      */
-    public function isOutputRedirected()
+    public function isOutputRedirected() : bool
     {
         return !empty($this->redirectOutput);
     }
@@ -84,7 +86,7 @@ class CommandLine implements Command
      *
      * @return string
      */
-    public function getRedirectPath()
+    public function getRedirectPath() : string
     {
         return $this->redirectOutput;
     }
@@ -92,9 +94,10 @@ class CommandLine implements Command
     /**
      * Pipe the command into given command.
      *
-     * @param \SebastianFeldmann\Cli\Command $cmd
+     * @param  \SebastianFeldmann\Cli\Command $cmd
+     * @return void
      */
-    public function pipeOutputTo(Command $cmd)
+    public function pipeOutputTo(Command $cmd) : void
     {
         if (!$this->canPipe()) {
             throw new RuntimeException('Can\'t pipe output');
@@ -107,7 +110,7 @@ class CommandLine implements Command
      *
      * @return bool
      */
-    public function canPipe()
+    public function canPipe() : bool
     {
         return !defined('PHP_WINDOWS_VERSION_BUILD');
     }
@@ -117,7 +120,7 @@ class CommandLine implements Command
      *
      * @return bool
      */
-    public function isPiped()
+    public function isPiped() : bool
     {
         return !empty($this->pipeline);
     }
@@ -127,7 +130,7 @@ class CommandLine implements Command
      *
      * @return string
      */
-    public function getPipeline()
+    public function getPipeline() : string
     {
         return $this->isPiped() ? ' | ' . implode(' | ', $this->pipeline) : '';
     }
@@ -135,9 +138,10 @@ class CommandLine implements Command
     /**
      * Adds a cli command to list of commands to execute.
      *
-     * @param \SebastianFeldmann\Cli\Command
+     * @param  \SebastianFeldmann\Cli\Command
+     * @return void
      */
-    public function addCommand(Command $cmd)
+    public function addCommand(Command $cmd) : void
     {
         $this->commands[] = $cmd;
     }
