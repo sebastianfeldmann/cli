@@ -114,4 +114,19 @@ class CommandLineTest extends TestCase
 
         $this->assertEquals([0, 1], $commandLine->getAcceptableExitCodes());
     }
+
+    /**
+     * Tests CommandLine::getPipeFail
+     */
+    public function testPipeFailActive()
+    {
+        $cmd         = new Executable('echo \'foo\'');
+        $compressor  = new Executable('bzip2 \'foo.bz2\'');
+        $commandLine = new CommandLine();
+        $commandLine->addCommand($cmd);
+        $commandLine->pipeOutputTo($compressor);
+        $commandLine->pipeFail(true);
+
+        $this->assertEquals('set -o pipefail; echo \'foo\' | bzip2 \'foo.bz2\'', $commandLine->getCommand());
+    }
 }
