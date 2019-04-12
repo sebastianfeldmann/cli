@@ -22,7 +22,7 @@ use RuntimeException;
 class CommandLine implements Command
 {
     /**
-     * List of system commands to execute.
+     * List of system commands to execute
      *
      * @var \SebastianFeldmann\Cli\Command[]
      */
@@ -43,6 +43,13 @@ class CommandLine implements Command
     private $pipeline = [];
 
     /**
+     * Should 'pipefail' be set?
+     *
+     * @var bool
+     */
+    private $pipeFail = false;
+
+    /**
      * List of acceptable exit codes.
      *
      * @var array
@@ -50,7 +57,7 @@ class CommandLine implements Command
     private $acceptedExitCodes = [0];
 
     /**
-     * Set the list of accepted exit codes.
+     * Set the list of accepted exit codes
      *
      * @param  int[] $codes
      * @return void
@@ -72,7 +79,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Should the output be redirected.
+     * Should the output be redirected
      *
      * @return bool
      */
@@ -92,7 +99,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Pipe the command into given command.
+     * Pipe the command into given command
      *
      * @param  \SebastianFeldmann\Cli\Command $cmd
      * @return void
@@ -106,7 +113,17 @@ class CommandLine implements Command
     }
 
     /**
-     * Can the pipe '|' operator be used.
+     * Get the 'pipefail' option command snippet
+     *
+     * @return string
+     */
+    public function getPipeFail()
+    {
+        return ($this->isPiped() && $this->pipeFail) ? 'set -o pipefail; ' : '';
+    }
+
+    /**
+     * Can the pipe '|' operator be used
      *
      * @return bool
      */
@@ -116,7 +133,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Is there a command pipeline.
+     * Is there a command pipeline
      *
      * @return bool
      */
@@ -126,7 +143,17 @@ class CommandLine implements Command
     }
 
     /**
-     * Return command pipeline.
+     * Should the pipefail option be set
+     *
+     * @param bool $pipeFail
+     */
+    public function pipeFail(bool $pipeFail)
+    {
+        $this->pipeFail = $pipeFail;
+    }
+
+    /**
+     * Return command pipeline
      *
      * @return string
      */
@@ -136,7 +163,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Adds a cli command to list of commands to execute.
+     * Adds a cli command to list of commands to execute
      *
      * @param  \SebastianFeldmann\Cli\Command
      * @return void
@@ -147,7 +174,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Generates the system command.
+     * Generates the system command
      *
      * @return string
      */
@@ -157,7 +184,8 @@ class CommandLine implements Command
         if ($amount < 1) {
             throw new RuntimeException('no command to execute');
         }
-        $cmd = ($amount > 1 ? '(' . implode(' && ', $this->commands) . ')' : $this->commands[0])
+        $cmd = $this->getPipeFail()
+             . ($amount > 1 ? '(' . implode(' && ', $this->commands) . ')' : $this->commands[0])
              . $this->getPipeline()
              . (!empty($this->redirectOutput) ? ' > ' . $this->redirectOutput : '');
 
@@ -165,7 +193,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Returns a list of exit codes that are valid.
+     * Returns a list of exit codes that are valid
      *
      * @return array
      */
@@ -175,7 +203,7 @@ class CommandLine implements Command
     }
 
     /**
-     * Returns the command to execute.
+     * Returns the command to execute
      *
      * @return string
      */
