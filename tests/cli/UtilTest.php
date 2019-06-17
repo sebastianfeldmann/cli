@@ -218,7 +218,7 @@ class UtilTest extends TestCase
         $plainText   = 'my text test';
         $coloredText = Util::formatWithColor('fg-black, bg-green', $plainText);
 
-        $this->assertContains("\x1b[0m", $coloredText);
+        $this->assertStringContainsString("\x1b[0m", $coloredText);
     }
 
     /**
@@ -229,7 +229,7 @@ class UtilTest extends TestCase
         $plainText   = '';
         $coloredText = Util::formatWithColor('fg-black, bg-green', $plainText);
 
-        $this->assertNotContains("\x1b[0m", $coloredText);
+        $this->assertStringNotContainsString("\x1b[0m", $coloredText);
     }
 
     /**

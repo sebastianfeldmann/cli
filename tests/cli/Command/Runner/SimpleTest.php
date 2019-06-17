@@ -67,8 +67,8 @@ class SimpleTest extends TestCase
             $runner = new Simple($process);
             $runner->run($cmd);
         } catch (\Exception $e) {
-            $this->assertContains('exit-code: 1', $e->getMessage());
-            $this->assertContains('message:   1', $e->getMessage());
+            $this->assertStringContainsString('exit-code: 1', $e->getMessage());
+            $this->assertStringContainsString('message:   1', $e->getMessage());
             throw $e;
         }
     }
