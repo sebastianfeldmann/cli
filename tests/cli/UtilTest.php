@@ -31,7 +31,7 @@ class UtilTest extends TestCase
     /**
      * Backup $_SERVER settings.
      */
-    public function setUp()
+    public function setUp() : void
     {
         self::$server = $_SERVER;
     }
@@ -39,7 +39,7 @@ class UtilTest extends TestCase
     /**
      * Restore $_SERVER settings.
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         $_SERVER = self::$server;
     }
