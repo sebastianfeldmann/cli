@@ -24,11 +24,10 @@ class CommandLineTest extends TestCase
 {
     /**
      * Tests CommandLine::getCommand
-     *
-     * @expectedException \RuntimeException
      */
     public function testGetExecFail()
     {
+        $this->expectException(\RuntimeException::class);
         $exec = new CommandLine();
         $exec->getCommand();
     }

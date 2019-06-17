@@ -47,11 +47,10 @@ class SimpleTest extends TestCase
 
     /**
      * Tests Exec::run
-     *
-     * @expectedException \RuntimeException
      */
     public function testRunFailed()
     {
+        $this->expectException(\RuntimeException::class);
         $res = new CommandResult('echo 1', 1, '', '1');
         $cmd = $this->getMockBuilder('\\SebastianFeldmann\\Cli\\Command')
                     ->disableOriginalConstructor()

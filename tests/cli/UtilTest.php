@@ -37,7 +37,7 @@ class UtilTest extends TestCase
     }
 
     /**
-     * Restore $_SERVER settings.
+     * Restore $_SERVER settings
      */
     public function tearDown() : void
     {
@@ -46,11 +46,10 @@ class UtilTest extends TestCase
 
     /**
      * Test detectCmdLocation Exception
-     *
-     * @expectedException \RuntimeException
      */
     public function testDetectCmdFail()
     {
+        $this->expectException(\RuntimeException::class);
         if (defined('PHP_WINDOWS_VERSION_BUILD')) {
             // can't be tested on windows system
             $this->assertTrue(true);
@@ -62,12 +61,11 @@ class UtilTest extends TestCase
     }
 
     /**
-     * Test detectCmdLocation Exception with path.
-     *
-     * @expectedException \RuntimeException
+     * Test detectCmdLocation Exception with path
      */
     public function testDetectCmdFailWithPath()
     {
+        $this->expectException(\RuntimeException::class);
         // assume ls should be there
         $cmd = Util::detectCmdLocation('someStupidCommand', '/tmp');
         $this->assertFalse(true, $cmd . ' should not be found');
@@ -118,11 +116,10 @@ class UtilTest extends TestCase
 
     /**
      * Tests Util::getEnvPath
-     *
-     * @expectedException \RuntimeException
      */
     public function testGetEnvPathFail()
     {
+        $this->expectException(\RuntimeException::class);
         unset($_SERVER['PATH']);
         unset($_SERVER['Path']);
         unset($_SERVER['path']);
@@ -167,8 +164,8 @@ class UtilTest extends TestCase
      *
      * @dataProvider providerWindowsPaths
      *
-     * @param string  $path
-     * @param boolean $expected
+     * @param string $path
+     * @param bool   $expected
      */
     public function testIsAbsolutePathWindows($path, $expected)
     {
@@ -190,7 +187,7 @@ class UtilTest extends TestCase
     /**
      * Data provider testIsAbsolutePathWindows.
      *
-     * @return return array
+     * @return array
      */
     public function providerWindowsPaths()
     {
