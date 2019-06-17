@@ -11,6 +11,7 @@ namespace SebastianFeldmann\Cli\Processor;
 
 use RuntimeException;
 use SebastianFeldmann\Cli\Command\Result;
+use SebastianFeldmann\Cli\Output;
 use SebastianFeldmann\Cli\Processor;
 
 /**
@@ -24,6 +25,32 @@ use SebastianFeldmann\Cli\Processor;
 class ProcOpen implements Processor
 {
     /**
+     * Handles the output of stdOut
+     *
+     * @var \SebastianFeldmann\Cli\Output
+     */
+    private $stdOutOutput;
+
+    /**
+     * Handles the Output of stdErr
+     *
+     * @var \SebastianFeldmann\Cli\Output
+     */
+    private $stdErrOutput;
+
+    /**
+     * ProcOpen constructor.
+     *
+     * @param \SebastianFeldmann\Cli\Output $stdOut
+     * @param \SebastianFeldmann\Cli\Output $stdErr
+     */
+    public function __construct(Output $stdOut = null, Output $stdErr = null)
+    {
+        $this->stdOutOutput = $stdOut ?? new Output\Silent();
+        $this->stdErrOutput = $stdErr ?? new Output\Silent();
+    }
+
+    /**
      * Execute the command.
      *
      * @param  string $cmd
@@ -32,25 +59,40 @@ class ProcOpen implements Processor
      */
     public function run(string $cmd, array $acceptableExitCodes = [0]) : Result
     {
-        $old            = error_reporting(0);
-        $descriptorSpec = [
+        $old  = error_reporting(0);
+        $spec = [
             ['pipe', 'r'],
             ['pipe', 'w'],
             ['pipe', 'w'],
         ];
 
-        $process = proc_open($cmd, $descriptorSpec, $pipes);
+        $process = proc_open($cmd, $spec, $pipes);
         if (!is_resource($process)) {
             throw new RuntimeException('can\'t execute \'proc_open\'');
         }
 
-        $stdOut = stream_get_contents($pipes[1]);
-        fclose($pipes[1]);
+        $stdOut = '';
+        $stdErr = '';
 
-        $stdErr = stream_get_contents($pipes[2]);
-        fclose($pipes[2]);
+        // Loop on process until it exits normally.
+        do {
+            $status = proc_get_status($process);
+            // If our pipes have data, grab it for later use.
+            $out = !feof($pipes[1]) ? fgets($pipes[1]) : '';
+            $err = !feof($pipes[2]) ? fgets($pipes[2]) : '';
 
-        $code = proc_close($process);
+            $this->stdOutOutput->write($out);
+            $this->stdErrOutput->write($err);
+
+            $stdOut .= $out;
+            $stdErr .= $err;
+        } while ($status['running']);
+
+        // According to documentation, the exit code is only valid the first call
+        // after a process is finished. We can't rely on the return value of
+        // proc_close because proc_get_status will read the exit code first.
+        $code = $status['exitcode'];
+        proc_close($process);
         error_reporting($old);
 
         return new Result($cmd, $code, $stdOut, $stdErr, '', $acceptableExitCodes);
