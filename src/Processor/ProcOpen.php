@@ -39,7 +39,7 @@ class ProcOpen implements Processor
     private $stdErrOutput;
 
     /**
-     * ProcOpen constructor.
+     * ProcOpen constructor
      *
      * @param \SebastianFeldmann\Cli\Output $stdOut
      * @param \SebastianFeldmann\Cli\Output $stdErr
@@ -51,7 +51,7 @@ class ProcOpen implements Processor
     }
 
     /**
-     * Execute the command.
+     * Execute the command
      *
      * @param  string $cmd
      * @param  int[]  $acceptableExitCodes
@@ -59,30 +59,23 @@ class ProcOpen implements Processor
      */
     public function run(string $cmd, array $acceptableExitCodes = [0]) : Result
     {
-        $old  = error_reporting(0);
-        $spec = [
-            ['pipe', 'r'],
-            ['pipe', 'w'],
-            ['pipe', 'w'],
-        ];
+        $old    = error_reporting(0);
+        $stdOut = '';
+        $stdErr = '';
+        $spec   = [['pipe', 'r'], ['pipe', 'w'], ['pipe', 'w']];
 
         $process = proc_open($cmd, $spec, $pipes);
         if (!is_resource($process)) {
             throw new RuntimeException('can\'t execute \'proc_open\'');
         }
 
-        $stdOut = '';
-        $stdErr = '';
-
-        // Loop on process until it exits normally.
+        // Loop on process until it exits
         do {
             $status = proc_get_status($process);
-            // If our pipes have data, grab it for later use.
-            $out = !feof($pipes[1]) ? fgets($pipes[1]) : '';
-            $err = !feof($pipes[2]) ? fgets($pipes[2]) : '';
+            $out    = !feof($pipes[1]) ? (string) fgets($pipes[1]) : '';
+            $err    = !feof($pipes[2]) ? (string) fgets($pipes[2]) : '';
 
-            $this->stdOutOutput->write($out);
-            $this->stdErrOutput->write($err);
+            $this->handleOutput($out, $err);
 
             $stdOut .= $out;
             $stdErr .= $err;
@@ -96,5 +89,18 @@ class ProcOpen implements Processor
         error_reporting($old);
 
         return new Result($cmd, $code, $stdOut, $stdErr, '', $acceptableExitCodes);
+    }
+
+    /**
+     * Uses the output handlers to process the given stdOut and stdErr output
+     *
+     * @param  string $stdOut
+     * @param  string $stdErr
+     * @return void
+     */
+    private function handleOutput(string $stdOut, string $stdErr) : void
+    {
+        $this->stdOutOutput->write($stdOut);
+        $this->stdErrOutput->write($stdErr);
     }
 }
