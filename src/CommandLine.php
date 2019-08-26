@@ -117,7 +117,7 @@ class CommandLine implements Command
      *
      * @return string
      */
-    public function getPipeFail()
+    public function getPipeFail() : string
     {
         return ($this->isPiped() && $this->pipeFail) ? 'set -o pipefail; ' : '';
     }
