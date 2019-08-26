@@ -1,17 +1,21 @@
 language: php
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 php:
   - 7.1
   - 7.2
   - 7.3
-  - 7.4snapshot
+  - nightly
 
 allow_failures:
-  - php: 7.4snapshot
+  - php: nightly
 
 before_script:
   - composer self-update
-  - composer install --no-interaction --prefer-source
+  - composer install --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpunit
