@@ -43,6 +43,7 @@ class ProcOpen implements Processor
         if (!is_resource($process)) {
             throw new RuntimeException('can\'t execute \'proc_open\'');
         }
+        fclose($pipes[0]);
 
         $stdOut = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
