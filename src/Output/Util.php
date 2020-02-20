@@ -35,4 +35,15 @@ class Util
         }
         return $lines;
     }
+
+    /**
+     * Replaces all 'known' line endings with unix \n line endings
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function normalizeLineEndings(string $text): string
+    {
+        return preg_replace('~(BSR_ANYCRLF)*\R~', "\n", $text);
+    }
 }
