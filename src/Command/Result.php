@@ -10,6 +10,7 @@
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Output\Util as OutputUtil;
+use SebastianFeldmann\Cli\Util;
 
 /**
  * Class Result
@@ -185,7 +186,7 @@ class Result
      */
     private function textToBuffer() : array
     {
-        return OutputUtil::trimEmptyLines(explode(PHP_EOL, $this->stdOut));
+        return OutputUtil::trimEmptyLines(explode("\n", Util::normalizeLineEndings($this->stdOut)));
     }
 
     /**

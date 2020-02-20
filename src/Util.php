@@ -243,6 +243,17 @@ abstract class Util
     }
 
     /**
+     * Replaces all 'known' line endings with unix \n line endings
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function normalizeLineEndings(string $text): string
+    {
+        return preg_replace('~(BSR_ANYCRLF)*\R~', "\n", $text);
+    }
+
+    /**
      * Formats a buffer with a specified ANSI color sequence if colors are enabled.
      *
      * @author Sebastian Bergmann <sebastian@phpunit.de>
