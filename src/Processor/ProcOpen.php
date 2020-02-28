@@ -44,6 +44,12 @@ class ProcOpen implements Processor
             throw new RuntimeException('can\'t execute \'proc_open\'');
         }
 
+        // Loop on process until it exits normally.
+        do {
+            $status = proc_get_status($process);
+        } while ($status && $status['running']);
+
+        $code   = $status['exitcode'] ?? -1;
         $stdOut = stream_get_contents($pipes[1]);
         $stdErr = stream_get_contents($pipes[2]);
 
@@ -53,7 +59,7 @@ class ProcOpen implements Processor
             unset($pipes[$index]);
         }
 
-        $code = proc_close($process);
+        proc_close($process);
         error_reporting($old);
 
         return new Result($cmd, $code, $stdOut, $stdErr, '', $acceptableExitCodes);
