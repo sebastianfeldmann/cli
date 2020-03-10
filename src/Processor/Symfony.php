@@ -33,7 +33,10 @@ class Symfony implements Processor
      */
     public function run(string $cmd, array $acceptableExitCodes = [0]) : Result
     {
-        $process = Process::fromShellCommandline($cmd);
+        $process = method_exists('Symfony\Component\Process\Process', 'fromShellCommandline')
+                 ? Process::fromShellCommandline($cmd)
+                 : new Process($cmd);
+
         $process->run();
         return new Result(
             $cmd,
