@@ -37,6 +37,7 @@ class Symfony implements Processor
                  ? Process::fromShellCommandline($cmd)
                  : new Process($cmd);
 
+        $process->setTimeout(null);
         $process->run();
         return new Result(
             $cmd,
