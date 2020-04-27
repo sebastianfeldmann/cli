@@ -46,7 +46,7 @@ class CommandLineTest extends TestCase
         $res = $commandLine->getCommand();
 
         $this->assertEquals('echo \'foo\'', $res);
-        $this->assertEquals('echo \'foo\'', (string)$commandLine);
+        $this->assertEquals('echo \'foo\'', (string) $commandLine);
     }
 
     /**
