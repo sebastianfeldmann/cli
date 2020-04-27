@@ -241,7 +241,7 @@ class UtilTest extends TestCase
         $decoratedText = Util::formatWithAsterisk($plainText);
 
         $this->assertEquals(72, strlen(trim($decoratedText)));
-        $this->assertTrue(strpos($decoratedText, '*') !== false);
+        $this->assertStringContainsString('*', $decoratedText);
     }
 
     /**
