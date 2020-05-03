@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli;
 
 use PHPUnit\Framework\TestCase;
@@ -31,7 +33,7 @@ class UtilTest extends TestCase
     /**
      * Backup $_SERVER settings.
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         self::$server = $_SERVER;
     }
@@ -39,7 +41,7 @@ class UtilTest extends TestCase
     /**
      * Restore $_SERVER settings
      */
-    public function tearDown() : void
+    public function tearDown(): void
     {
         $_SERVER = self::$server;
     }

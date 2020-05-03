@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli;
 
 use SebastianFeldmann\Cli\Command\Result;
@@ -28,5 +30,5 @@ interface Processor
      * @param  int[]  $acceptableExitCodes
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function run(string $cmd, array $acceptableExitCodes = [0]) : Result;
+    public function run(string $cmd, array $acceptableExitCodes = [0]): Result;
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Command;
@@ -29,5 +31,5 @@ interface Runner
      * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
      * @return \SebastianFeldmann\Cli\Command\Runner\Result
      */
-    public function run(Command $command, OutputFormatter $formatter = null) : RunnerResult;
+    public function run(Command $command, OutputFormatter $formatter = null): RunnerResult;
 }

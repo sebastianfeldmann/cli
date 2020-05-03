@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli;
 
 /**
@@ -24,12 +26,12 @@ interface Command
      *
      * @return string
      */
-    public function getCommand() : string;
+    public function getCommand(): string;
 
     /**
      * Returns a list of exit codes that are valid.
      *
      * @return array
      */
-    public function getAcceptableExitCodes() : array;
+    public function getAcceptableExitCodes(): array;
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Output;
 
 /**
@@ -25,7 +27,7 @@ class Util
      * @param  array $lines
      * @return array
      */
-    public static function trimEmptyLines(array $lines) : array
+    public static function trimEmptyLines(array $lines): array
     {
         for ($last = count($lines) - 1; $last > -1; $last--) {
             if (!empty($lines[$last])) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Output\Util as OutputUtil;
@@ -87,8 +89,7 @@ class Result
         string $stdErr = '',
         string $redirectPath = '',
         array $validExitCodes = [0]
-    )
-    {
+    ) {
         $this->cmd            = $cmd;
         $this->code           = $code;
         $this->stdOut         = $stdOut;
@@ -102,7 +103,7 @@ class Result
      *
      * @return string
      */
-    public function getCmd() : string
+    public function getCmd(): string
     {
         return $this->cmd;
     }
@@ -112,7 +113,7 @@ class Result
      *
      * @return int
      */
-    public function getCode() : int
+    public function getCode(): int
     {
         return $this->code;
     }
@@ -120,7 +121,7 @@ class Result
     /**
      * Command executed successful.
      */
-    public function isSuccessful() : bool
+    public function isSuccessful(): bool
     {
         return in_array($this->code, $this->validExitCodes);
     }
@@ -130,7 +131,7 @@ class Result
      *
      * @return string
      */
-    public function getStdOut() : string
+    public function getStdOut(): string
     {
         return $this->stdOut;
     }
@@ -140,7 +141,7 @@ class Result
      *
      * @return string
      */
-    public function getStdErr() : string
+    public function getStdErr(): string
     {
         return $this->stdErr;
     }
@@ -150,7 +151,7 @@ class Result
      *
      * @return bool
      */
-    public function isOutputRedirected() : bool
+    public function isOutputRedirected(): bool
     {
         return !empty($this->redirectPath);
     }
@@ -160,7 +161,7 @@ class Result
      *
      * @return string
      */
-    public function getRedirectPath() : string
+    public function getRedirectPath(): string
     {
         return $this->redirectPath;
     }
@@ -170,7 +171,7 @@ class Result
      *
      * @return array
      */
-    public function getStdOutAsArray() : array
+    public function getStdOutAsArray(): array
     {
         if (null === $this->buffer) {
             $this->buffer = $this->textToBuffer();
@@ -183,7 +184,7 @@ class Result
      *
      * @return array
      */
-    private function textToBuffer() : array
+    private function textToBuffer(): array
     {
         return OutputUtil::trimEmptyLines(explode("\n", OutputUtil::normalizeLineEndings($this->stdOut)));
     }
@@ -193,7 +194,7 @@ class Result
      *
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->stdOut;
     }
