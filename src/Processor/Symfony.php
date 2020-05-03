@@ -11,7 +11,6 @@
 
 namespace SebastianFeldmann\Cli\Processor;
 
-use RuntimeException;
 use SebastianFeldmann\Cli\Command\Result;
 use SebastianFeldmann\Cli\Processor;
 use Symfony\Component\Process\Process;
@@ -35,7 +34,7 @@ class Symfony implements Processor
      */
     public function run(string $cmd, array $acceptableExitCodes = [0]): Result
     {
-        $process = method_exists('Symfony\Component\Process\Process', 'fromShellCommandline')
+        $process = method_exists(Process::class, 'fromShellCommandline')
                  ? Process::fromShellCommandline($cmd)
                  : new Process([$cmd]);
 
