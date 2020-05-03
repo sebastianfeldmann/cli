@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Processor;
 
 use RuntimeException;
@@ -31,11 +33,11 @@ class Symfony implements Processor
      * @param  int[]  $acceptableExitCodes
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function run(string $cmd, array $acceptableExitCodes = [0]) : Result
+    public function run(string $cmd, array $acceptableExitCodes = [0]): Result
     {
         $process = method_exists('Symfony\Component\Process\Process', 'fromShellCommandline')
                  ? Process::fromShellCommandline($cmd)
-                 : new Process($cmd);
+                 : new Process([$cmd]);
 
         $process->setTimeout(null);
         $process->run();

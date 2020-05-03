@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Command;
@@ -66,7 +68,7 @@ class Executable implements Command
      *
      * @return string
      */
-    public function getCommand() : string
+    public function getCommand(): string
     {
         return $this->cmd
         . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
@@ -78,7 +80,7 @@ class Executable implements Command
      *
      * @return int[]
      */
-    public function getAcceptableExitCodes() : array
+    public function getAcceptableExitCodes(): array
     {
         return $this->acceptableExitCodes;
     }
@@ -90,7 +92,7 @@ class Executable implements Command
      * @param  bool $bool
      * @return \SebastianFeldmann\Cli\Command\Executable
      */
-    public function silence($bool = true) : Executable
+    public function silence($bool = true): Executable
     {
         $this->isSilent = $bool && !defined('PHP_WINDOWS_VERSION_BUILD');
         return $this;
@@ -100,11 +102,11 @@ class Executable implements Command
      * Add option to list.
      *
      * @param  string               $option
-     * @param  mixed <string|array> $value
+     * @param  mixed                $value
      * @param  string               $glue
      * @return \SebastianFeldmann\Cli\Command\Executable
      */
-    public function addOption(string $option, $value = null, string $glue = '=') : Executable
+    public function addOption(string $option, $value = null, string $glue = '='): Executable
     {
         if ($value !== null) {
             // force space for multiple arguments e.g. --option 'foo' 'bar'
@@ -129,7 +131,7 @@ class Executable implements Command
      * @param  string $glue
      * @return \SebastianFeldmann\Cli\Command\Executable
      */
-    public function addOptionIfNotEmpty(string $option, $check, bool $asValue = true, string $glue = '=') : Executable
+    public function addOptionIfNotEmpty(string $option, $check, bool $asValue = true, string $glue = '='): Executable
     {
         if (!empty($check)) {
             if ($asValue) {
@@ -144,10 +146,10 @@ class Executable implements Command
     /**
      * Add argument to list.
      *
-     * @param  mixed <string|array> $argument
+     * @param  mixed $argument
      * @return \SebastianFeldmann\Cli\Command\Executable
      */
-    public function addArgument($argument) : Executable
+    public function addArgument($argument): Executable
     {
         $this->options[] = $this->escapeArgument($argument);
         return $this;
@@ -156,10 +158,10 @@ class Executable implements Command
     /**
      * Escape a shell argument.
      *
-     * @param  mixed <string|array> $argument
+     * @param  mixed $argument
      * @return string
      */
-    protected function escapeArgument($argument) : string
+    protected function escapeArgument($argument): string
     {
         if (is_array($argument)) {
             $argument = array_map('escapeshellarg', $argument);
@@ -175,7 +177,7 @@ class Executable implements Command
      *
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getCommand();
     }

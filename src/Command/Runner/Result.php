@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli\Command\Runner;
 
 use SebastianFeldmann\Cli\Command\Result as CommandResult;
@@ -52,7 +54,7 @@ class Result
      *
      * @return \SebastianFeldmann\Cli\Command\Result
      */
-    public function getCommandResult() : CommandResult
+    public function getCommandResult(): CommandResult
     {
         return $this->cmdResult;
     }
@@ -62,7 +64,7 @@ class Result
      *
      * @return bool
      */
-    public function isSuccessful() : bool
+    public function isSuccessful(): bool
     {
         return $this->cmdResult->isSuccessful();
     }
@@ -70,9 +72,9 @@ class Result
     /**
      * Return the command exit code.
      *
-     * @return string
+     * @return int
      */
-    public function getCode() : string
+    public function getCode(): int
     {
         return $this->cmdResult->getCode();
     }
@@ -82,7 +84,7 @@ class Result
      *
      * @return string
      */
-    public function getCmd() : string
+    public function getCmd(): string
     {
         return $this->cmdResult->getCmd();
     }
@@ -92,7 +94,7 @@ class Result
      *
      * @return string
      */
-    public function getStdOut() : string
+    public function getStdOut(): string
     {
         return $this->cmdResult->getStdOut();
     }
@@ -102,7 +104,7 @@ class Result
      *
      * @return string
      */
-    public function getStdErr() : string
+    public function getStdErr(): string
     {
         return $this->cmdResult->getStdErr();
     }
@@ -112,7 +114,7 @@ class Result
      *
      * @return bool
      */
-    public function isOutputRedirected() : bool
+    public function isOutputRedirected(): bool
     {
         return $this->cmdResult->isOutputRedirected();
     }
@@ -122,7 +124,7 @@ class Result
      *
      * @return string
      */
-    public function getRedirectPath() : string
+    public function getRedirectPath(): string
     {
         return $this->cmdResult->getRedirectPath();
     }
@@ -132,7 +134,7 @@ class Result
      *
      * @return array
      */
-    public function getBufferedOutput() : array
+    public function getBufferedOutput(): array
     {
         return $this->cmdResult->getStdOutAsArray();
     }
@@ -142,7 +144,7 @@ class Result
      *
      * @return iterable
      */
-    public function getFormattedOutput() : iterable
+    public function getFormattedOutput(): iterable
     {
         return $this->formatted;
     }

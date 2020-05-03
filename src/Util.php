@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of SebastianFeldmann\Cli.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Cli;
 
 use RuntimeException;
@@ -48,23 +50,23 @@ abstract class Util
      * @return string                    Absolute path to detected command including command itself
      * @throws \RuntimeException
      */
-    public static function detectCmdLocation(string $cmd, string $path = '', array $optionalLocations = []) : string
+    public static function detectCmdLocation(string $cmd, string $path = '', array $optionalLocations = []): string
     {
         $detectionSteps = [
-            function($cmd) use ($path) {
+            function ($cmd) use ($path) {
                 if (!empty($path)) {
                     return self::detectCmdLocationInPath($cmd, $path);
                 }
                 return '';
             },
-            function($cmd) {
+            function ($cmd) {
                 return self::detectCmdLocationWithWhich($cmd);
             },
-            function($cmd) {
+            function ($cmd) {
                 $paths = explode(PATH_SEPARATOR, self::getEnvPath());
                 return self::detectCmdLocationInPaths($cmd, $paths);
             },
-            function($cmd) use ($optionalLocations) {
+            function ($cmd) use ($optionalLocations) {
                 return self::detectCmdLocationInPaths($cmd, $optionalLocations);
             }
         ];
@@ -87,7 +89,7 @@ abstract class Util
      * @return string
      * @throws \RuntimeException
      */
-    public static function detectCmdLocationInPath(string $cmd, string $path) : string
+    public static function detectCmdLocationInPath(string $cmd, string $path): string
     {
         $command = $path . DIRECTORY_SEPARATOR . $cmd;
         $bin     = self::getExecutable($command);
@@ -103,7 +105,7 @@ abstract class Util
      * @param  string $cmd
      * @return string
      */
-    public static function detectCmdLocationWithWhich($cmd) : string
+    public static function detectCmdLocationWithWhich($cmd): string
     {
         $bin = '';
         // on nx systems use 'which' command.
@@ -112,7 +114,6 @@ abstract class Util
             $bin     = self::getExecutable($command);
         }
         return $bin;
-
     }
 
     /**
@@ -122,7 +123,7 @@ abstract class Util
      * @param  array  $paths
      * @return string
      */
-    public static function detectCmdLocationInPaths($cmd, array $paths) : string
+    public static function detectCmdLocationInPaths($cmd, array $paths): string
     {
         foreach ($paths as $path) {
             $command = $path . DIRECTORY_SEPARATOR . $cmd;
@@ -140,7 +141,7 @@ abstract class Util
      * @return string
      * @throws \RuntimeException
      */
-    public static function getEnvPath() : string
+    public static function getEnvPath(): string
     {
         // check for unix and windows case $_SERVER index
         foreach (['PATH', 'Path', 'path'] as $index) {
@@ -158,7 +159,7 @@ abstract class Util
      * @param  string $command
      * @return string
      */
-    public static function getExecutable($command) : string
+    public static function getExecutable($command): string
     {
         if (is_executable($command)) {
             return $command;
@@ -179,7 +180,7 @@ abstract class Util
      * @param  string $path
      * @return bool
      */
-    public static function isAbsolutePath($path) : bool
+    public static function isAbsolutePath($path): bool
     {
         // path already absolute?
         if ($path[0] === '/') {
@@ -212,7 +213,7 @@ abstract class Util
      * @param  string $path
      * @return bool
      */
-    public static function isAbsoluteWindowsPath($path) : bool
+    public static function isAbsoluteWindowsPath($path): bool
     {
         return ($path[0] === '\\' || (strlen($path) >= 3 && preg_match('#^[A-Z]\:[/\\\]#i', substr($path, 0, 3))));
     }
@@ -225,7 +226,7 @@ abstract class Util
      * @param  bool   $useIncludePath
      * @return string
      */
-    public static function toAbsolutePath(string $path, string $base, bool $useIncludePath = false) : string
+    public static function toAbsolutePath(string $path, string $base, bool $useIncludePath = false): string
     {
         if (self::isAbsolutePath($path)) {
             return $path;
@@ -250,7 +251,7 @@ abstract class Util
      * @param  string $buffer
      * @return string
      */
-    public static function formatWithColor(string $color, string $buffer) : string
+    public static function formatWithColor(string $color, string $buffer): string
     {
         $codes   = array_map('trim', explode(',', $color));
         $lines   = explode("\n", $buffer);
@@ -277,7 +278,7 @@ abstract class Util
      * @param  int    $length
      * @return string
      */
-    public static function formatWithAsterisk(string $buffer, int $length = 72) : string
+    public static function formatWithAsterisk(string $buffer, int $length = 72): string
     {
         return $buffer . str_repeat('*', $length - strlen($buffer)) . PHP_EOL;
     }
@@ -287,7 +288,7 @@ abstract class Util
      *
      * @return bool
      */
-    public static function canPipe() : bool
+    public static function canPipe(): bool
     {
         return !defined('PHP_WINDOWS_VERSION_BUILD');
     }
