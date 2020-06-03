@@ -47,13 +47,16 @@ class ProcOpen implements Processor
         }
 
         // Loop on process until it exits normally.
+        $stdOut = "";
+        $stdErr = "";
         do {
+            // Consume output streams while the process runs. The buffer will block process updates when full
             $status = proc_get_status($process);
+            $stdOut .= stream_get_contents($pipes[1]);
+            $stdErr .= stream_get_contents($pipes[2]);
         } while ($status && $status['running']);
 
         $code   = $status['exitcode'] ?? -1;
-        $stdOut = stream_get_contents($pipes[1]);
-        $stdErr = stream_get_contents($pipes[2]);
 
         // make sure all pipes are closed before calling proc_close
         foreach ($pipes as $index => $pipe) {
