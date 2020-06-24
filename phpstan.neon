@@ -2,3 +2,6 @@ parameters:
   level: 5
   paths:
   - %currentWorkingDirectory%/src/
+  ignoreErrors:
+    - '~Call to function method_exists\(\) with~'
+    - '~Process constructor expects array, string given~'
