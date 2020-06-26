@@ -34,9 +34,13 @@ class Symfony implements Processor
      */
     public function run(string $cmd, array $acceptableExitCodes = [0]): Result
     {
+        // the else (:) variant is there to keep backwards compatibility with previous symfony versions
+        // and is only getting executed in those. This is the reason why the Process constructor is
+        // given a string instead of an array. The whole ternary can be removed if Symfony versions
+        // below 4.2 are not supported anymore.
         $process = method_exists(Process::class, 'fromShellCommandline')
                  ? Process::fromShellCommandline($cmd)
-                 : new Process($cmd);
+                 : new Process($cmd); // @phpstan-ignore-line
 
         $process->setTimeout(null);
         $process->run();
