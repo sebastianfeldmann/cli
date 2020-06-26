@@ -30,5 +30,11 @@
     "psr-4": {
       "SebastianFeldmann\\Cli\\": "tests/cli/"
     }
+  },
+  "scripts": {
+    "post-install-cmd": "tools/phive install",
+    "test": "tools/phpunit",
+    "analyse": "tools/phpstan analyse",
+    "style": "tools/phpcs --standard=psr12 src tests"
   }
 }
