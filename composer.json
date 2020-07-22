@@ -36,5 +36,10 @@
     "test": "tools/phpunit",
     "analyse": "tools/phpstan analyse",
     "style": "tools/phpcs --standard=psr12 src tests"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.3.x-dev"
+    }
   }
 }

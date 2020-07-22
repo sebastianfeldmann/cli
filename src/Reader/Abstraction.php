@@ -96,5 +96,5 @@ abstract class Abstraction implements Reader
      *
      * @return iterable
      */
-    protected abstract function createIterator(): iterable;
+    abstract protected function createIterator(): iterable;
 }
