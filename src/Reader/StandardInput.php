@@ -33,7 +33,7 @@ class StandardInput extends Abstraction
     /**
      * StandardInput constructor.
      *
-     * @param $stdInHandle
+     * @param resource $stdInHandle
      */
     public function __construct($stdInHandle)
     {
@@ -57,7 +57,7 @@ class StandardInput extends Abstraction
             throw new Exception('stream_select failed');
         }
         if ($result !== 0) {
-            yield stream_get_line($this->handle, null);
+            yield stream_get_line($this->handle, 0);
         }
     }
 }
