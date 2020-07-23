@@ -57,7 +57,9 @@ class StandardInput extends Abstraction
             throw new Exception('stream_select failed');
         }
         if ($result !== 0) {
-            yield stream_get_line($this->handle, 0, PHP_EOL);
+            while (!\feof($this->handle)) {
+                yield \fgets($this->handle);
+            }
         }
     }
 }
