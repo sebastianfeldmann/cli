@@ -1,5 +1,7 @@
 .idea
 
+tools
+
 build
 
 .phpunit.result.cache
