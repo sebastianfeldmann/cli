@@ -41,7 +41,9 @@ class Simple implements Runner
      */
     public function __construct(Processor $processor = null)
     {
-        $this->processor = $processor !== null ? $processor : new Processor\ProcOpen();
+        $this->processor = $processor !== null
+                         ? $processor
+                         : new Processor\ProcOpen();
     }
 
     /**
