@@ -272,10 +272,10 @@ class UtilTest extends TestCase
 
         Util::removeDir($dirToDelete);
 
-        $this->assertFileNotExists($file);
-        $this->assertFileNotExists($fileInSub);
-        $this->assertFileNotExists($subDir);
-        $this->assertFileNotExists($dirToDelete);
+        $this->assertFileDoesNotExist($file);
+        $this->assertFileDoesNotExist($fileInSub);
+        $this->assertFileDoesNotExist($subDir);
+        $this->assertFileDoesNotExist($dirToDelete);
     }
 
     /**
