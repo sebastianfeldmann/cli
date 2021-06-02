@@ -12,6 +12,7 @@
 namespace SebastianFeldmann\Cli\Command;
 
 use SebastianFeldmann\Cli\Command;
+use SebastianFeldmann\Cli\Util;
 
 /**
  * Class Executable
@@ -59,7 +60,7 @@ class Executable implements Command
      */
     public function __construct(string $cmd, array $exitCodes = [0])
     {
-        $this->cmd                 = $cmd;
+        $this->cmd                 = ! defined('PHP_WINDOWS_VERSION_BUILD') ? $cmd : Util::escapeSpacesOnWindows($cmd);
         $this->acceptableExitCodes = $exitCodes;
     }
 

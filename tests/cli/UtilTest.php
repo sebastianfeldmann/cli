@@ -279,6 +279,28 @@ class UtilTest extends TestCase
     }
 
     /**
+     * Tests Util::escapeSpacesOnWindows
+     * @dataProvider providerWindowsPathsCases
+     */
+    public function testEscapeSpacesOnWindows(string $expected, string $cmd): void
+    {
+        self::assertSame($expected, Util::escapeSpacesOnWindows($cmd));
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function providerWindowsPathsCases(): array
+    {
+        $escapedCommand = 'E:/Program^ Files/';
+        $unEscapedCommand = 'E:/Program Files/';
+        return [
+            'test already escaped sequence' => [$escapedCommand, $escapedCommand],
+            'test unescaped sequence' => [$escapedCommand, $unEscapedCommand],
+        ];
+    }
+
+    /**
      * Create some temp command
      *
      * @param  string $cmd
