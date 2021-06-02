@@ -312,4 +312,15 @@ abstract class Util
         }
         rmdir($dir);
     }
+
+    /**
+     * Escapes 'unescaped' space sequences on Windows.
+     * i.e: 'E:/Program Files' escaped to 'E:/Program^ Files'
+     * @param string $cmd
+     * @return string
+     */
+    public static function escapeSpacesOnWindows(string $cmd): string
+    {
+        return preg_replace('/(?<!\^)( )/', '^ ', $cmd);
+    }
 }
