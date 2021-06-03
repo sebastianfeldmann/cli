@@ -31,7 +31,7 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo', [0, 1]);
         $cmd->addArgument('bar');
 
-        $this->assertEquals('foo \'bar\'', (string) $cmd, 'argument should be added');
+        $this->assertEquals('"foo" \'bar\'', (string) $cmd, 'argument should be added');
     }
 
     /**
@@ -53,7 +53,7 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo');
         $cmd->silence(true);
 
-        $this->assertEquals('foo 2> /dev/null', (string) $cmd, 'command should be silenced');
+        $this->assertEquals('"foo" 2> /dev/null', (string) $cmd, 'command should be silenced');
     }
 
     /**
@@ -64,7 +64,7 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo');
         $cmd->addArgument(array('bar', 'baz'));
 
-        $this->assertEquals('foo \'bar\' \'baz\'', (string) $cmd, 'arguments should be added');
+        $this->assertEquals('"foo" \'bar\' \'baz\'', (string) $cmd, 'arguments should be added');
     }
 
     /**
@@ -75,7 +75,7 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo');
         $cmd->addOption('-bar', array('fiz', 'baz'));
 
-        $this->assertEquals('foo -bar \'fiz\' \'baz\'', (string) $cmd, 'arguments should be added');
+        $this->assertEquals('"foo" -bar \'fiz\' \'baz\'', (string) $cmd, 'arguments should be added');
     }
 
     /**
@@ -86,11 +86,11 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo');
         $cmd->addOptionIfNotEmpty('-bar', '', false);
 
-        $this->assertEquals('foo', (string) $cmd, 'option should not be added');
+        $this->assertEquals('"foo"', (string) $cmd, 'option should not be added');
 
         $cmd->addOptionIfNotEmpty('-bar', 'fiz', false);
 
-        $this->assertEquals('foo -bar', (string) $cmd, 'option should be added');
+        $this->assertEquals('"foo" -bar', (string) $cmd, 'option should be added');
     }
 
     /**
@@ -101,10 +101,10 @@ class ExecutableTest extends TestCase
         $cmd = new Executable('foo');
         $cmd->addOptionIfNotEmpty('-bar', '');
 
-        $this->assertEquals('foo', (string) $cmd, 'option should not be added');
+        $this->assertEquals('"foo"', (string) $cmd, 'option should not be added');
 
         $cmd->addOptionIfNotEmpty('-bar', 'fiz');
 
-        $this->assertEquals('foo -bar=\'fiz\'', (string) $cmd, 'option should be added');
+        $this->assertEquals('"foo" -bar=\'fiz\'', (string) $cmd, 'option should be added');
     }
 }

@@ -60,7 +60,7 @@ class Executable implements Command
      */
     public function __construct(string $cmd, array $exitCodes = [0])
     {
-        $this->cmd                 = ! defined('PHP_WINDOWS_VERSION_BUILD') ? $cmd : Util::escapeSpacesOnWindows($cmd);
+        $this->cmd                 = $cmd;
         $this->acceptableExitCodes = $exitCodes;
     }
 
@@ -71,9 +71,11 @@ class Executable implements Command
      */
     public function getCommand(): string
     {
-        return $this->cmd
-        . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
-        . ($this->isSilent         ? ' 2> /dev/null'                      : '');
+        $cmd = sprintf('"%s"', $this->cmd)
+            . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
+            . ($this->isSilent         ? ' 2> /dev/null'                      : '');
+
+        return Util::escapeSpacesIfOnWindows($cmd);
     }
 
     /**

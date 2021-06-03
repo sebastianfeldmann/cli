@@ -47,8 +47,8 @@ class CommandLineTest extends TestCase
 
         $res = $commandLine->getCommand();
 
-        $this->assertEquals('echo \'foo\'', $res);
-        $this->assertEquals('echo \'foo\'', (string) $commandLine);
+        $this->assertEquals('"echo" \'foo\'', $res);
+        $this->assertEquals('"echo" \'foo\'', (string) $commandLine);
     }
 
     /**
@@ -69,7 +69,7 @@ class CommandLineTest extends TestCase
 
         $res = $commandLine->getCommand();
 
-        $this->assertEquals('(echo \'foo\' && echo \'bar\')', $res);
+        $this->assertEquals('("echo" \'foo\' && "echo" \'bar\')', $res);
     }
 
     /**
@@ -102,7 +102,7 @@ class CommandLineTest extends TestCase
         $commandLine->addCommand($cmd);
         $commandLine->pipeOutputTo($compressor);
 
-        $this->assertEquals('echo \'foo\' | bzip2 \'foo.bz2\'', $commandLine->getCommand());
+        $this->assertEquals('"echo \'foo\'" | "bzip2 \'foo.bz2\'"', $commandLine->getCommand());
     }
 
     /**
@@ -128,6 +128,6 @@ class CommandLineTest extends TestCase
         $commandLine->pipeOutputTo($compressor);
         $commandLine->pipeFail(true);
 
-        $this->assertEquals('set -o pipefail; echo \'foo\' | bzip2 \'foo.bz2\'', $commandLine->getCommand());
+        $this->assertEquals('set -o pipefail; "echo \'foo\'" | "bzip2 \'foo.bz2\'"', $commandLine->getCommand());
     }
 }
