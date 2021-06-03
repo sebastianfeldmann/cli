@@ -314,13 +314,13 @@ abstract class Util
     }
 
     /**
-     * Escapes 'unescaped' space sequences on Windows.
-     * i.e: 'E:/Program Files' escaped to 'E:/Program^ Files'
+     * Wraps windows command with a double quote to escape spaces
+     * i.e: `E:/Program Files/tar.exe -zcf ...` escaped to `"E:/Program Files/tar.exe -zcf ..."`
      * @param string $cmd
      * @return string
      */
-    public static function escapeSpacesOnWindows(string $cmd): string
+    public static function escapeSpacesIfOnWindows(string $cmd): string
     {
-        return preg_replace('/(?<!\^)( )/', '^ ', $cmd);
+        return defined('PHP_WINDOWS_VERSION_BUILD') ? sprintf('"%s"', $cmd) : $cmd;
     }
 }

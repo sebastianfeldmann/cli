@@ -280,24 +280,16 @@ class UtilTest extends TestCase
 
     /**
      * Tests Util::escapeSpacesOnWindows
-     * @dataProvider providerWindowsPathsCases
      */
-    public function testEscapeSpacesOnWindows(string $expected, string $cmd): void
+    public function testEscapeSpacesOnWindows(): void
     {
-        self::assertSame($expected, Util::escapeSpacesOnWindows($cmd));
-    }
-
-    /**
-     * @return string[][]
-     */
-    public function providerWindowsPathsCases(): array
-    {
-        $escapedCommand = 'E:/Program^ Files/';
+        $escapedCommand = '"E:/Program Files/"';
         $unEscapedCommand = 'E:/Program Files/';
-        return [
-            'test already escaped sequence' => [$escapedCommand, $escapedCommand],
-            'test unescaped sequence' => [$escapedCommand, $unEscapedCommand],
-        ];
+        if (defined('PHP_WINDOWS_VERSION_BUILD')) {
+            self::assertSame($escapedCommand, Util::escapeSpacesIfOnWindows($unEscapedCommand));
+        } else {
+            self::assertSame($unEscapedCommand, Util::escapeSpacesIfOnWindows($unEscapedCommand));
+        }
     }
 
     /**
