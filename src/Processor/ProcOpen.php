@@ -54,7 +54,7 @@ class ProcOpen implements Processor
             $status = proc_get_status($process);
             $stdOut .= stream_get_contents($pipes[1]);
             $stdErr .= stream_get_contents($pipes[2]);
-        } while ($status && $status['running']);
+        } while ($status && $status['running']); // @phpstan-ignore-line
 
         $code   = $status['exitcode'] ?? -1;
 
