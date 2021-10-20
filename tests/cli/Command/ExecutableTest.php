@@ -107,4 +107,17 @@ class ExecutableTest extends TestCase
 
         $this->assertEquals('"foo" -bar=\'fiz\'', (string) $cmd, 'option should be added');
     }
+
+    /**
+     * Tests Executable::addVar
+     */
+    public function testAddVar()
+    {
+        $cmd = new Executable('tool');
+        $cmd->addVar('FOO', 'fiz');
+        $cmd->addVar('BAR', 'baz');
+        $cmd->addOptionIfNotEmpty('--extra', 'bonus');
+
+        $this->assertEquals('FOO=\'fiz\' BAR=\'baz\' "tool" --extra=\'bonus\'', (string) $cmd, 'vars prefix');
+    }
 }

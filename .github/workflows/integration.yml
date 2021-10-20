@@ -41,4 +41,4 @@ jobs:
       run: tools/phpcs --standard=psr12 src tests
 
     - name: Static code analysis
-      run: tools/phpstan analyse
+      run: tools/phpstan analyse -c phpstan-${{ matrix.php-versions }}.neon

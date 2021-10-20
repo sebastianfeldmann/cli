@@ -46,6 +46,13 @@ class Executable implements Command
     private $options = [];
 
     /**
+     * List of variables to define
+     *
+     * @var string[]
+     */
+    private $vars = [];
+
+    /**
      * List of acceptable exit codes.
      *
      * @var array
@@ -71,9 +78,9 @@ class Executable implements Command
      */
     public function getCommand(): string
     {
-        $cmd = sprintf('"%s"', $this->cmd)
-            . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
-            . ($this->isSilent         ? ' 2> /dev/null'                      : '');
+        $cmd = $this->getVars() . sprintf('"%s"', $this->cmd)
+             . (count($this->options)   ? ' ' . implode(' ', $this->options)   : '')
+             . ($this->isSilent         ? ' 2> /dev/null'                      : '');
 
         return Util::escapeSpacesIfOnWindows($cmd);
     }
@@ -123,6 +130,36 @@ class Executable implements Command
         $this->options[] = $option . $value;
 
         return $this;
+    }
+
+    /**
+     * Add a var definition to a command
+     *
+     * @param  string $name
+     * @param  string $value
+     * @return $this
+     */
+    public function addVar(string $name, string $value): Executable
+    {
+        $this->vars[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Return variable definition string e.g. "MYFOO='sometext' MYBAR='nothing' "
+     *
+     * @return string
+     */
+    protected function getVars(): string
+    {
+        $varStrings = [];
+
+        foreach ($this->vars as $name => $value) {
+            $varStrings[] = $name . '=' . escapeshellarg($value);
+        }
+
+        return count($varStrings) ? implode(' ', $varStrings) . ' ' : '';
     }
 
     /**
