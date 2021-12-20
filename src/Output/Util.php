@@ -46,6 +46,7 @@ class Util
      */
     public static function normalizeLineEndings(string $text): string
     {
-        return preg_replace('~(BSR_ANYCRLF)*\R~', "\n", $text);
+        $mod = preg_match('/[\p{Cyrillic}]/u', $text) ? 'u' : '';
+        return preg_replace('~(*BSR_UNICODE)\R~' . $mod, "\n", $text);
     }
 }

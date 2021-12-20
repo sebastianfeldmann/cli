@@ -72,12 +72,28 @@ class UtilTest extends TestCase
     /**
      * Tests Util::normalizeLineEndings
      */
-    public function testNormalizeLineEndings(): void
+    public function testNormalizeLineEndingsASCII(): void
     {
         $text = "test\ntest\r\ntest\r\ntest";
         $this->assertEquals("test\ntest\ntest\ntest", Util::normalizeLineEndings($text));
+    }
 
+    /**
+     * Tests Util::normalizeLineEndings
+     */
+    public function testNormalizeLineEndingsUTF8(): void
+    {
         $uft8text = "test\ftest\x0btest\r\ntest\x85test";
         $this->assertEquals("test\ntest\ntest\ntest\ntest", Util::normalizeLineEndings($uft8text));
+    }
+
+    /**
+     * Tests Util::normalizeLineEndings
+     */
+    public function testNormalizeLineEndingsCyrillic(): void
+    {
+        $cyrillicText = "text: хо\ntext: хо\r\n";
+        $expected     = "text: хо\ntext: хо\n";
+        $this->assertEquals($expected, Util::normalizeLineEndings($cyrillicText));
     }
 }
