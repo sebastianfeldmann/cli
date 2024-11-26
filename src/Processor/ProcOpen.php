@@ -54,9 +54,7 @@ class ProcOpen implements Processor
             $status = proc_get_status($process);
             $stdOut .= stream_get_contents($pipes[1]);
             $stdErr .= stream_get_contents($pipes[2]);
-        } while ($status && $status['running']);
-
-        $code   = $status['exitcode'] ?? -1;
+        } while ($status['running']);
 
         // make sure all pipes are closed before calling proc_close
         foreach ($pipes as $index => $pipe) {
@@ -67,6 +65,6 @@ class ProcOpen implements Processor
         proc_close($process);
         error_reporting($old);
 
-        return new Result($cmd, $code, $stdOut, $stdErr, '', $acceptableExitCodes);
+        return new Result($cmd, $status['exitcode'], $stdOut, $stdErr, '', $acceptableExitCodes);
     }
 }
