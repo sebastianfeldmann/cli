@@ -27,9 +27,9 @@ interface Runner
     /**
      * Execute a command.
      *
-     * @param  \SebastianFeldmann\Cli\Command                 $command
-     * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
+     * @param  \SebastianFeldmann\Cli\Command                      $command
+     * @param  \SebastianFeldmann\Cli\Command\OutputFormatter|null $formatter
      * @return \SebastianFeldmann\Cli\Command\Runner\Result
      */
-    public function run(Command $command, OutputFormatter $formatter = null): RunnerResult;
+    public function run(Command $command, ?OutputFormatter $formatter = null): RunnerResult;
 }

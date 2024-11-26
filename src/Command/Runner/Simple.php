@@ -37,9 +37,9 @@ class Simple implements Runner
     /**
      * Exec constructor.
      *
-     * @param \SebastianFeldmann\Cli\Processor $processor
+     * @param \SebastianFeldmann\Cli\Processor|null $processor
      */
-    public function __construct(Processor $processor = null)
+    public function __construct(?Processor $processor = null)
     {
         $this->processor = $processor !== null
                          ? $processor
@@ -49,11 +49,11 @@ class Simple implements Runner
     /**
      * Execute a cli command.
      *
-     * @param  \SebastianFeldmann\Cli\Command                 $command
-     * @param  \SebastianFeldmann\Cli\Command\OutputFormatter $formatter
+     * @param  \SebastianFeldmann\Cli\Command                      $command
+     * @param  \SebastianFeldmann\Cli\Command\OutputFormatter|null $formatter
      * @return \SebastianFeldmann\Cli\Command\Runner\Result
      */
-    public function run(Command $command, OutputFormatter $formatter = null): Result
+    public function run(Command $command, ?OutputFormatter $formatter = null): Result
     {
         $cmd = $this->processor->run($command->getCommand(), $command->getAcceptableExitCodes());
 
