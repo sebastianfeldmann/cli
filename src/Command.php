@@ -34,4 +34,11 @@ interface Command
      * @return array
      */
     public function getAcceptableExitCodes(): array;
+
+    /**
+     * Convert command to string
+     *
+     * @return string
+     */
+    public function __toString(): string;
 }
